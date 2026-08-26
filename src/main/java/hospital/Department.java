@@ -1,6 +1,6 @@
 package hospital;
 
-public class Department {
+public class Department extends BaseEntity {
 
     public Department() {
 
