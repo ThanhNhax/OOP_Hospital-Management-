@@ -8,13 +8,14 @@ public class Department extends BaseEntity{
     // Đảm báo đơn trách nhiệm -> ở class này chỉ quản lý các thuộc tính -> get/set thuộc tính nào.
     
     // ==== Constructor ====
+    public Department(){} // Khi viết constructor có tham số luôn cần có constructor rỗng để nhập hoặc thêm .dat, vì Java đã xóa constructor mặc định sau khi tạo constructor có tham số.
     // gọi constructor của lớp cha bằng super(tham_số)
     public Department(String dID, String ten, Date ngay_tao, Date ngayUpdate){super(dID, ten, ngay_tao, ngayUpdate);} // Dùng departmentID (dID) vào id ở baseentity đối với department
 
     // ==== Getter/Setter ====
     // 1. Get: lấy thông tin trong private ra dùng
-    // Thêm hàm lấy departmentID -> giúp lấy ID đúng nhanh
-    public String getDepartmentID(){return getID();}
+    public String getDepartmentID(){return getID();} // Thêm hàm lấy departmentID -> giúp lấy ID đúng nhanh
+    public String getDepartmentName(){return getName();} // Lấy đúng tên khoa
 
     // 2. Set: Không có set ở class này, vì tất cả được set ở Base.
 
@@ -28,7 +29,7 @@ public class Department extends BaseEntity{
         String strCreateDate = (getCreateDate() != null) ? sdf.format(getCreateDate()) : "";
         String strUpdateDate = (getLastUpdateDate() != null) ? sdf.format(getLastUpdateDate()) : "";
         // Dùng formart để vẽ khung tương tự printf("%-15s | %-20s", deparmentID, name) của C++
-        return String.format("| %-15s | %-30s | %-12s | %-12s |", getDepartmentID(), getName(), strCreateDate, strUpdateDate);
+        return String.format("| %-15s | %-30s | %-12s | %-12s |", getDepartmentID(), getDepartmentName(), strCreateDate, strUpdateDate);
     }
     // Thực hiện việc phải định nghĩa hàm showInfo() riêng của class được quy định ở hàm cha
     @Override public void showInfo(){
