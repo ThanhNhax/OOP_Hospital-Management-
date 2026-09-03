@@ -11,3 +11,6 @@
 - Tạo class Doctor kế thừa BaseEntity bổ sung sex address departmentID và override showInfo
 - Sửa Department: Bổ sung constructor rỗng, sửa getName thành getDepartmentName để rõ nghĩa hơn khi lấy (name có tên khoa và tên bác sĩ khác nhau)
 - Viết xong class IManager<T>
+
+# 3/9:
+- Xong DepartmentManager, chưa viết has_doctor, chờ viết DoctorManager trước.
