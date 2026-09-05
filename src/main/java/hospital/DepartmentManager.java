@@ -3,6 +3,7 @@ package hospital;
 import java.io.*; // Dùng nhiều thư viện trong io nên dùng * để lấy tất cả - không làm nặng hơn vì chỉ lấy đúng những class được sử dụng
 import java.util.ArrayList; // Để dùng mảng list. Trong pj lớn có thể import thêm List sẵn để mở rộng khi cần.
 import java.util.List;
+import util.Language;
 
 // IManager tương tự prototype, chứa các tên hàm cần thực thi. DeptMan cần viết định nghĩa để thực thi (implements) các hàm đó. VD khi gọi:
 /*IManager<Department> deptManager = new DepartmentManager();
@@ -61,13 +62,17 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
     @Override public void showAll(){
         // Nếu trong list rỗng -> chỉ in thông báo ds trống
         if (departmentList.isEmpty()) {
-            utils.Notice("Danh sach phong ban hien tai dang trong!!");
+            utils.Notice(Language.get(Language.EMPTY_DEPT_LIST));
             return; // dừng luôn.
         }
 
         // Nếu không thì in tiêu đề dạng bảng
         // Dùng printf để đặt format tương tự String.format
-        System.out.printf("| %-15s | %-30s | %-12s | %-12s |\n", "DEPARTMENT ID", "DEPARTMENT NAME", "CREATE DATE", "UPDATE DATE");
+        System.out.printf("| %-15s | %-30s | %-12s | %-12s |\n",
+                Language.get(Language.TABLE_DEPT_ID),
+                Language.get(Language.TABLE_DEPT_NAME),
+                Language.get(Language.TABLE_CREATE_DATE),
+                Language.get(Language.TABLE_UPDATE_DATE));
         // Gọi showInfo trong Department để in đúng theo bảng các thông tin trong list
         for (Department dept : departmentList) dept.showInfo();
     }
@@ -81,7 +86,7 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
             // gọi hàm writeObject(departmentList) để ghi danh sách departmentList ra file
             oos.writeObject(departmentList); // Lưu dữ liệu vào file làm ẩn -> không cần thông báo đã lưu thành công
-        }catch (IOException e) {System.out.println("Loi: " + e); // nếu thất bại thì thông báo để biết đã lỗi, có thể dùng hàm message() để đọc được lỗi đang bị. Nhưng có thể bị null, nên dùng e đọc lỗi trực tiếp.
+        }catch (IOException e) {System.out.println(Language.get(Language.FILE_IO, e.toString())); // nếu thất bại thì thông báo để biết đã lỗi, có thể dùng hàm message() để đọc được lỗi đang bị. Nhưng có thể bị null, nên dùng e đọc lỗi trực tiếp.
         }
     }
 
@@ -99,7 +104,7 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
             // dùng readObject để đọc data trong file
             departmentList = (List<Department>) ois.readObject(); // ép kiểu Object thành List<Dept>
         } catch (Exception e) {
-            System.out.println("Loi: " + e.getMessage());
+            System.out.println(Language.get(Language.FILE_IO, e.getMessage()));
         }
     }
 }

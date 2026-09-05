@@ -1,0 +1,54 @@
+# English language file
+# Format: CODE=Full sentence (code matches Language.java constant names)
+
+# --- Errors ---
+UNKNOWN=Unknown error.
+EMPTY_CHOICE=Choice cannot be empty. Please try again.
+INVALID_CHOICE=Invalid choice.
+EMPTY_DEPT_ID=Department ID cannot be empty. Please try again.
+DUPLICATE_DEPT_ID=Department ID already exists. Please enter another ID.
+EMPTY_DEPT_NAME=Department name cannot be empty. Please try again.
+ADD_DEPT_FAIL=Failed to add department.
+EMPTY_DEPT_LIST=The department list is currently empty!!
+EMPTY_INPUT=Input cannot be empty. Please try again.
+EMPTY_NAME=Name cannot be empty. Please try again.
+EMPTY_GENDER=Gender cannot be empty. Please try again.
+INVALID_GENDER=Invalid gender. Please enter Male/Female or Nam/Nu.
+EMPTY_CONFIRM=Confirmation cannot be empty. Please try again.
+INVALID_CONFIRM=Invalid confirmation. Please enter Y or N.
+FILE_IO=File read/write error: 
+
+# --- Menu / prompt ---
+MENU_TITLE==== HOSPITAL MANAGEMENT ===
+MENU_ADD_DEPT=1. Add department
+MENU_TEST=2. Test validation
+MENU_LANGUAGE=3. Change language
+MENU_EXIT=0. Exit
+PROMPT_CHOICE=Select an option: 
+GOODBYE=Goodbye.
+ADD_DEPT_TITLE=--- ADD DEPARTMENT ---
+PROMPT_DEPT_ID=Enter department ID: 
+PROMPT_DEPT_NAME=Enter department name: 
+ADD_DEPT_SUCCESS=Department added successfully. Created date: 
+TEST_TITLE==== TEST VALIDATION ===
+PROMPT_TEST_NAME=Enter name (cannot be empty): 
+LABEL_ENTERED_NAME=Entered name: 
+PROMPT_TEST_GENDER=Enter gender (Male/Female): 
+LABEL_ENTERED_GENDER=Entered gender: 
+PROMPT_TEST_CONFIRM=Do you want to continue? (Y/N): 
+LABEL_CONFIRMATION=Confirmation: 
+LABEL_ACCEPTED=Accepted
+LABEL_DECLINED=Declined
+LABEL_DATE_FORMAT=Current date format: 
+TABLE_DEPT_ID=DEPARTMENT ID
+TABLE_DEPT_NAME=DEPARTMENT NAME
+TABLE_CREATE_DATE=CREATE DATE
+TABLE_UPDATE_DATE=UPDATE DATE
+
+# --- Language picker ---
+LANG_TITLE=LANGUAGE
+LANG_OPTION_VI=Tiếng Việt
+LANG_OPTION_EN=English
+LANG_PROMPT=Your choice: 
+LANG_SELECTED=English selected.
+LANG_INVALID=Invalid choice.
