@@ -16,16 +16,29 @@ public class Language {
 
     // --- Mã UI (trùng tên trong lang/vi.txt và lang/en.txt) ---
     public static final String MENU_TITLE = "MENU_TITLE";
-    public static final String MENU_ADD_DEPT = "MENU_ADD_DEPT";
+    public static final String MENU_DEPT = "MENU_DEPT";
+    public static final String MENU_DOCTOR = "MENU_DOCTOR";
     public static final String MENU_TEST = "MENU_TEST";
     public static final String MENU_LANGUAGE = "MENU_LANGUAGE";
     public static final String MENU_EXIT = "MENU_EXIT";
+    public static final String SUBMENU_DEPT_TITLE = "SUBMENU_DEPT_TITLE";
+    public static final String SUBMENU_DEPT_ADD = "SUBMENU_DEPT_ADD";
+    public static final String SUBMENU_DOC_TITLE = "SUBMENU_DOC_TITLE";
+    public static final String SUBMENU_DOC_ADD = "SUBMENU_DOC_ADD";
+    public static final String SUBMENU_BACK = "SUBMENU_BACK";
     public static final String PROMPT_CHOICE = "PROMPT_CHOICE";
     public static final String GOODBYE = "GOODBYE";
     public static final String ADD_DEPT_TITLE = "ADD_DEPT_TITLE";
     public static final String PROMPT_DEPT_ID = "PROMPT_DEPT_ID";
     public static final String PROMPT_DEPT_NAME = "PROMPT_DEPT_NAME";
     public static final String ADD_DEPT_SUCCESS = "ADD_DEPT_SUCCESS";
+    public static final String ADD_DOC_TITLE = "ADD_DOC_TITLE";
+    public static final String PROMPT_DOC_ID = "PROMPT_DOC_ID";
+    public static final String PROMPT_DOC_NAME = "PROMPT_DOC_NAME";
+    public static final String PROMPT_DOC_SEX = "PROMPT_DOC_SEX";
+    public static final String PROMPT_DOC_ADDRESS = "PROMPT_DOC_ADDRESS";
+    public static final String PROMPT_DOC_DEPT_ID = "PROMPT_DOC_DEPT_ID";
+    public static final String ADD_DOC_SUCCESS = "ADD_DOC_SUCCESS";
     public static final String TEST_TITLE = "TEST_TITLE";
     public static final String PROMPT_TEST_NAME = "PROMPT_TEST_NAME";
     public static final String LABEL_ENTERED_NAME = "LABEL_ENTERED_NAME";
@@ -40,6 +53,10 @@ public class Language {
     public static final String TABLE_DEPT_NAME = "TABLE_DEPT_NAME";
     public static final String TABLE_CREATE_DATE = "TABLE_CREATE_DATE";
     public static final String TABLE_UPDATE_DATE = "TABLE_UPDATE_DATE";
+    public static final String TABLE_DOC_ID = "TABLE_DOC_ID";
+    public static final String TABLE_DOC_NAME = "TABLE_DOC_NAME";
+    public static final String TABLE_SEX = "TABLE_SEX";
+    public static final String TABLE_ADDRESS = "TABLE_ADDRESS";
     public static final String LANG_TITLE = "LANG_TITLE";
     public static final String LANG_OPTION_VI = "LANG_OPTION_VI";
     public static final String LANG_OPTION_EN = "LANG_OPTION_EN";
@@ -63,6 +80,13 @@ public class Language {
     public static final String EMPTY_CONFIRM = "EMPTY_CONFIRM";
     public static final String INVALID_CONFIRM = "INVALID_CONFIRM";
     public static final String FILE_IO = "FILE_IO";
+    public static final String EMPTY_DOC_ID = "EMPTY_DOC_ID";
+    public static final String DUPLICATE_DOC_ID = "DUPLICATE_DOC_ID";
+    public static final String EMPTY_DOC_NAME = "EMPTY_DOC_NAME";
+    public static final String EMPTY_ADDRESS = "EMPTY_ADDRESS";
+    public static final String INVALID_DEPT_FK = "INVALID_DEPT_FK";
+    public static final String ADD_DOC_FAIL = "ADD_DOC_FAIL";
+    public static final String EMPTY_DOC_LIST = "EMPTY_DOC_LIST";
 
     private static String current = VI; // Ngôn ngữ đang chọn: VI hoặc EN
     private static final Map<String, String> viMap = new HashMap<>(); // MÃ -> câu tiếng Việt

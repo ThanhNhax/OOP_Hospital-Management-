@@ -2,8 +2,11 @@ package hospital;
 
 import java.io.*; // Dùng nhiều thư viện trong io nên dùng * để lấy tất cả - không làm nặng hơn vì chỉ lấy đúng những class được sử dụng
 import java.util.ArrayList; // Để dùng mảng list. Trong pj lớn có thể import thêm List sẵn để mở rộng khi cần.
+import java.util.Date;
 import java.util.List;
 import util.Language;
+import util.ConsoleHelper;
+import util.Validation;
 
 // IManager tương tự prototype, chứa các tên hàm cần thực thi. DeptMan cần viết định nghĩa để thực thi (implements) các hàm đó. VD khi gọi:
 /*IManager<Department> deptManager = new DepartmentManager();
@@ -38,6 +41,37 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
         return (dept != null && !isDuplicateID(dept.getDepartmentID())) ? departmentList.add(dept) : false; // Dùng hàm add để thêm vào list
     }
 
+    // Nhập từ console rồi gọi add(): kiểm tra trùng ID, gán createDate
+    public void addFromInput() {
+        System.out.println(Language.get(Language.ADD_DEPT_TITLE));
+
+        String id;
+        while (true) {
+            id = Validation.readNonEmptyString(
+                    Language.get(Language.PROMPT_DEPT_ID),
+                    Language.EMPTY_DEPT_ID);
+            if (isDuplicateID(id)) {
+                ConsoleHelper.printNotice(Language.get(Language.DUPLICATE_DEPT_ID));
+            } else {
+                break;
+            }
+        }
+
+        String name = Validation.readNonEmptyString(
+                Language.get(Language.PROMPT_DEPT_NAME),
+                Language.EMPTY_DEPT_NAME);
+
+        Date createDate = new Date();
+        Department dept = new Department(id, name, createDate, null);
+
+        if (add(dept)) {
+            ConsoleHelper.printNotice(Language.get(Language.ADD_DEPT_SUCCESS) + Validation.formatDate(createDate));
+            showAll();
+        } else {
+            ConsoleHelper.printNotice(Language.get(Language.ADD_DEPT_FAIL));
+        }
+    }
+
     // 2. Xóa theo ID: kiểm tra ID có tồn tại -> xóa thành công, không thì false.
     @Override public boolean delete(String id){
         // Đặt biến đối tượng dept là biến có id cần xóa
@@ -62,7 +96,7 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
     @Override public void showAll(){
         // Nếu trong list rỗng -> chỉ in thông báo ds trống
         if (departmentList.isEmpty()) {
-            utils.Notice(Language.get(Language.EMPTY_DEPT_LIST));
+            ConsoleHelper.printNotice(Language.get(Language.EMPTY_DEPT_LIST));
             return; // dừng luôn.
         }
 
