@@ -1,6 +1,6 @@
 package hospital;
 import java.util.Date;
-import java.text.SimpleDateFormat;
+import util.Validator;
 
 public class Doctor extends BaseEntity{
     private String sex;
@@ -36,9 +36,8 @@ public class Doctor extends BaseEntity{
     // ==== Hàm in ====
     @Override public String toString(){
         // Đặt biến chỉnh form ngày in
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        String sdfCreateDate = (getCreateDate() != null) ? sdf.format(getCreateDate()) : "";
-        String sdfUpdateDate = (getLastUpdateDate() != null) ? sdf.format(getLastUpdateDate()) : "";
+        String sdfCreateDate = Validator.formatDate(getCreateDate());
+        String sdfUpdateDate = Validator.formatDate(getLastUpdateDate());
 
         // Vẽ bảng in
         return String.format("| %-15s | %-30s | %-7s | %-50s | %-15s | %-12s | %-12s |", getDoctorID(), getDoctorName(), sex, address, getDepartmentID(), sdfCreateDate, sdfUpdateDate);

@@ -5,19 +5,19 @@ public class Main {
         System.out.println("=== TEST VALIDATION ===");
         
         // Test 1: Non-empty string
-        String name = util.Validation.readNonEmptyString("Enter name (cannot be empty): ");
+        String name = util.Validator.readNonEmptyString("Enter name (cannot be empty): ");
         System.out.println("Entered name: " + name);
         
         // Test 2: Gender
-        String gender = util.Validation.readGender("Enter gender (Male/Female): ");
+        String gender = util.Validator.readGender("Enter gender (Male/Female): ");
         System.out.println("Entered gender: " + gender);
         
         // Test 3: Confirm Y/N
-        boolean confirm = util.Validation.readConfirm("Do you want to continue? (Y/N): ");
+        boolean confirm = util.Validator.readConfirm("Do you want to continue? (Y/N): ");
         System.out.println("Confirmation: " + (confirm ? "Accepted" : "Declined"));
         
         // Test 4: Format Date
-        System.out.println("Current date format: " + util.Validation.formatDate(new java.util.Date()));
+        System.out.println("Current date format: " + util.Validator.formatDate(new java.util.Date()));
     }
 }
 //

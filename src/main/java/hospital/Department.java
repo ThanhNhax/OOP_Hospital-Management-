@@ -1,7 +1,6 @@
 package hospital;
-
 import java.util.Date;
-import java.text.SimpleDateFormat; // Ép kiểu khi in ngày về dd/mm/yyyy cho đẹp khi đưa vào bảng.
+import util.Validator;
 
 // Kế thừa (extends) từ hàm cha BaseEntity
 public class Department extends BaseEntity {
@@ -31,12 +30,10 @@ public class Department extends BaseEntity {
     // Định nghĩa cách gán chuỗi ngay ngắn bằng toString()
     @Override
     public String toString() {
-        // Đặt biến ép kiểu cách in ngày trước
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         // đặt biến String để nhận kết quả ngày in trả về. "" nếu NULL, else thì trả
         // đúng ngày get được đã sdf.format
-        String strCreateDate = (getCreateDate() != null) ? sdf.format(getCreateDate()) : "";
-        String strUpdateDate = (getLastUpdateDate() != null) ? sdf.format(getLastUpdateDate()) : "";
+        String strCreateDate = Validator.formatDate(getCreateDate());
+        String strUpdateDate = Validator.formatDate(getLastUpdateDate());
         // Dùng formart để vẽ khung tương tự printf("%-15s | %-20s", deparmentID, name) của C++
         return String.format("| %-15s | %-30s | %-12s | %-12s |", getDepartmentID(), getDepartmentName(), strCreateDate, strUpdateDate);
     }

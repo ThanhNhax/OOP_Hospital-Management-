@@ -4,6 +4,8 @@ import java.io.*; // Dùng nhiều thư viện trong io nên dùng * để lấy
 import java.util.ArrayList; // Để dùng mảng list. Trong pj lớn có thể import thêm List sẵn để mở rộng khi cần.
 import java.util.List;
 
+import util.Validator;
+
 // IManager tương tự prototype, chứa các tên hàm cần thực thi. DeptMan cần viết định nghĩa để thực thi (implements) các hàm đó. VD khi gọi:
 /*IManager<Department> deptManager = new DepartmentManager();
 IManager<Doctor> docManager = new DoctorManager();*/
@@ -61,7 +63,7 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
     @Override public void showAll(){
         // Nếu trong list rỗng -> chỉ in thông báo ds trống
         if (departmentList.isEmpty()) {
-            utils.Notice("Danh sach phong ban hien tai dang trong!!");
+            Validator.Notice("Danh sach phong ban hien tai dang trong!!");
             return; // dừng luôn.
         }
 
@@ -81,7 +83,7 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
             // gọi hàm writeObject(departmentList) để ghi danh sách departmentList ra file
             oos.writeObject(departmentList); // Lưu dữ liệu vào file làm ẩn -> không cần thông báo đã lưu thành công
-        }catch (IOException e) {System.out.println("Loi: " + e); // nếu thất bại thì thông báo để biết đã lỗi, có thể dùng hàm message() để đọc được lỗi đang bị. Nhưng có thể bị null, nên dùng e đọc lỗi trực tiếp.
+        }catch (IOException e) {Validator.Notice("Loi: " + e); // nếu thất bại thì thông báo để biết đã lỗi, có thể dùng hàm message() để đọc được lỗi đang bị. Nhưng có thể bị null, nên dùng e đọc lỗi trực tiếp.
         }
     }
 
@@ -99,7 +101,7 @@ public class DepartmentManager implements IManager<Department>{ // Nghĩa là De
             // dùng readObject để đọc data trong file
             departmentList = (List<Department>) ois.readObject(); // ép kiểu Object thành List<Dept>
         } catch (Exception e) {
-            System.out.println("Loi: " + e.getMessage());
+            Validator.Notice("Loi: " + e.getMessage());
         }
     }
 }

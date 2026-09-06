@@ -14,3 +14,7 @@
 
 # 3/9:
 - Xong DepartmentManager, chưa viết has_doctor, chờ viết DoctorManager trước.
+
+# 6/9:
+- Xong các utils Validator (bao gồm: đọc chuỗi, nhận cả rỗng cho Add/Update; xử lý rỗng; điều kiện trống để gọi lại dùng trong DeptMan/DocMan; xử lý confirm; gender; date)
+- Sửa trong Dept và Doc, toString() dùng trực tiếp hàm formatDate của utils
