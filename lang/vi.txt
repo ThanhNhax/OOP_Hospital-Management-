@@ -36,6 +36,7 @@ SUBMENU_DEPT_TITLE=--- QUẢN LÝ KHOA ---
 SUBMENU_DEPT_ADD=1. Thêm khoa
 SUBMENU_DOC_TITLE=--- QUẢN LÝ BÁC SĨ ---
 SUBMENU_DOC_ADD=1. Thêm bác sĩ
+SUBMENU_DOC_SHOW=2. Hiển thị danh sách bác sĩ
 SUBMENU_BACK=0. Quay lại
 PROMPT_CHOICE=Chọn chức năng: 
 GOODBYE=Tạm biệt.
