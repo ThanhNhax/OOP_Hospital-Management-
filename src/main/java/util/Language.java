@@ -25,6 +25,7 @@ public class Language {
     public static final String SUBMENU_DEPT_ADD = "SUBMENU_DEPT_ADD";
     public static final String SUBMENU_DOC_TITLE = "SUBMENU_DOC_TITLE";
     public static final String SUBMENU_DOC_ADD = "SUBMENU_DOC_ADD";
+    public static final String SUBMENU_DOC_SHOW = "SUBMENU_DOC_SHOW";
     public static final String SUBMENU_BACK = "SUBMENU_BACK";
     public static final String PROMPT_CHOICE = "PROMPT_CHOICE";
     public static final String GOODBYE = "GOODBYE";

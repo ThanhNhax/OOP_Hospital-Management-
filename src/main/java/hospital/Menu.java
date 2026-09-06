@@ -73,11 +73,12 @@ public class Menu {
         }
     }
 
-    // Submenu bác sĩ: thêm bác sĩ hoặc quay lại menu chính
+    // Submenu bác sĩ: thêm bác sĩ, hiển thị danh sách hoặc quay lại menu chính
     private void doctorSubmenu() {
         while (true) {
             System.out.println("\n" + Language.get(Language.SUBMENU_DOC_TITLE));
             System.out.println(Language.get(Language.SUBMENU_DOC_ADD));
+            System.out.println(Language.get(Language.SUBMENU_DOC_SHOW));
             System.out.println(Language.get(Language.SUBMENU_BACK));
             String choice = Validation.readNonEmptyString(
                     Language.get(Language.PROMPT_CHOICE),
@@ -85,6 +86,9 @@ public class Menu {
             switch (choice) {
                 case "1":
                     docManager.addFromInput();
+                    break;
+                case "2":
+                    docManager.showAll();
                     break;
                 case "0":
                     return;
