@@ -27,7 +27,7 @@ public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
         return findByID(id) != null; // Nếu khác null + tìm thấy ID -> true.
     }
 
-    // Các hàm cơ bản: kiểm tra thêm, xóa thành công hay không:
+    // Các hàm cơ bản: kiểm tra thêm, xóa thành công hay không và hỗ trợ để sửa:
     // 1. Thêm: Kiểm tra nếu không trùng id và item != null -> thêm vào -> true; else false
     @Override public boolean add(T item){
         return (item != null && !isDuplicateID(item.getID())) ? list.add(item) : false; // Dùng hàm add để thêm vào list
