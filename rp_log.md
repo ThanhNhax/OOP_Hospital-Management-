@@ -18,3 +18,10 @@
 # 6/9:
 - Xong các utils Validator (bao gồm: đọc chuỗi, nhận cả rỗng cho Add/Update; xử lý rỗng; điều kiện trống để gọi lại dùng trong DeptMan/DocMan; xử lý confirm; gender; date)
 - Sửa trong Dept và Doc, toString() dùng trực tiếp hàm formatDate của utils
+
+# 7/9:
+### P1:
+- Thêm BaseManager<T> để làm lớp cha cho DepartmentManager và DoctorManager -> tránh dup code.
+- Sửa DeptMan kế thừa BaseMan, chỉ còn hàm update và showInfo cần viết riêng.
+- Thêm DocMan
+- DeptMan thêm hasDoctor -> deleteDepartment -> không xóa dept còn doc.
