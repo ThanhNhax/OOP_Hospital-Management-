@@ -1,0 +1,78 @@
+# English language file
+# Format: CODE=Full sentence (code matches Language.java constant names)
+
+# --- Errors ---
+UNKNOWN=Unknown error.
+EMPTY_CHOICE=Choice cannot be empty. Please try again.
+INVALID_CHOICE=Invalid choice.
+EMPTY_DEPT_ID=Department ID cannot be empty. Please try again.
+DUPLICATE_DEPT_ID=Department ID already exists. Please enter another ID.
+EMPTY_DEPT_NAME=Department name cannot be empty. Please try again.
+ADD_DEPT_FAIL=Failed to add department.
+EMPTY_DEPT_LIST=The department list is currently empty!!
+EMPTY_INPUT=Input cannot be empty. Please try again.
+EMPTY_NAME=Name cannot be empty. Please try again.
+EMPTY_GENDER=Gender cannot be empty. Please try again.
+INVALID_GENDER=Invalid gender. Please enter Male/Female or Nam/Nu.
+EMPTY_CONFIRM=Confirmation cannot be empty. Please try again.
+INVALID_CONFIRM=Invalid confirmation. Please enter Y or N.
+FILE_IO=File read/write error: 
+EMPTY_DOC_ID=Doctor ID cannot be empty. Please try again.
+DUPLICATE_DOC_ID=Doctor ID already exists. Please enter another ID.
+EMPTY_DOC_NAME=Doctor name cannot be empty. Please try again.
+EMPTY_ADDRESS=Address cannot be empty. Please try again.
+INVALID_DEPT_FK=Department ID does not exist. Please enter an existing department ID.
+ADD_DOC_FAIL=Failed to add doctor.
+EMPTY_DOC_LIST=The doctor list is currently empty!! 
+
+# --- Menu / prompt ---
+MENU_TITLE==== HOSPITAL MANAGEMENT ===
+MENU_DEPT=1. Department management
+MENU_DOCTOR=2. Doctor management
+MENU_TEST=3. Test validation
+MENU_LANGUAGE=4. Change language
+MENU_EXIT=0. Exit
+SUBMENU_DEPT_TITLE=--- DEPARTMENT MANAGEMENT ---
+SUBMENU_DEPT_ADD=1. Add department
+SUBMENU_DOC_TITLE=--- DOCTOR MANAGEMENT ---
+SUBMENU_DOC_ADD=1. Add doctor
+SUBMENU_BACK=0. Back
+PROMPT_CHOICE=Select an option: 
+GOODBYE=Goodbye.
+ADD_DEPT_TITLE=--- ADD DEPARTMENT ---
+PROMPT_DEPT_ID=Enter department ID: 
+PROMPT_DEPT_NAME=Enter department name: 
+ADD_DEPT_SUCCESS=Department added successfully. Created date: 
+ADD_DOC_TITLE=--- ADD DOCTOR ---
+PROMPT_DOC_ID=Enter doctor ID: 
+PROMPT_DOC_NAME=Enter doctor name: 
+PROMPT_DOC_SEX=Enter gender (Male/Female): 
+PROMPT_DOC_ADDRESS=Enter address: 
+PROMPT_DOC_DEPT_ID=Enter department ID (must already exist): 
+ADD_DOC_SUCCESS=Doctor added successfully. Created date: 
+TEST_TITLE==== TEST VALIDATION ===
+PROMPT_TEST_NAME=Enter name (cannot be empty): 
+LABEL_ENTERED_NAME=Entered name: 
+PROMPT_TEST_GENDER=Enter gender (Male/Female): 
+LABEL_ENTERED_GENDER=Entered gender: 
+PROMPT_TEST_CONFIRM=Do you want to continue? (Y/N): 
+LABEL_CONFIRMATION=Confirmation: 
+LABEL_ACCEPTED=Accepted
+LABEL_DECLINED=Declined
+LABEL_DATE_FORMAT=Current date format: 
+TABLE_DEPT_ID=DEPARTMENT ID
+TABLE_DEPT_NAME=DEPARTMENT NAME
+TABLE_CREATE_DATE=CREATE DATE
+TABLE_UPDATE_DATE=UPDATE DATE
+TABLE_DOC_ID=DOCTOR ID
+TABLE_DOC_NAME=DOCTOR NAME
+TABLE_SEX=SEX
+TABLE_ADDRESS=ADDRESS
+
+# --- Language picker ---
+LANG_TITLE=LANGUAGE
+LANG_OPTION_VI=Tiếng Việt
+LANG_OPTION_EN=English
+LANG_PROMPT=Your choice: 
+LANG_SELECTED=English selected.
+LANG_INVALID=Invalid choice.

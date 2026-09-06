@@ -1,0 +1,78 @@
+# File ngôn ngữ tiếng Việt
+# Định dạng: MÃ=Câu đầy đủ (mã trùng tên hằng trong Language.java)
+
+# --- Lỗi ---
+UNKNOWN=Lỗi không xác định.
+EMPTY_CHOICE=Lựa chọn không được để trống. Vui lòng nhập lại.
+INVALID_CHOICE=Lựa chọn không hợp lệ.
+EMPTY_DEPT_ID=Mã khoa không được để trống. Vui lòng nhập lại.
+DUPLICATE_DEPT_ID=Mã khoa đã tồn tại. Vui lòng nhập mã khác.
+EMPTY_DEPT_NAME=Tên khoa không được để trống. Vui lòng nhập lại.
+ADD_DEPT_FAIL=Thêm khoa thất bại.
+EMPTY_DEPT_LIST=Danh sách phòng ban hiện tại đang trống!!
+EMPTY_INPUT=Dữ liệu không được để trống. Vui lòng nhập lại.
+EMPTY_NAME=Tên không được để trống. Vui lòng nhập lại.
+EMPTY_GENDER=Giới tính không được để trống. Vui lòng nhập lại.
+INVALID_GENDER=Giới tính không hợp lệ. Vui lòng nhập Male/Female hoặc Nam/Nu.
+EMPTY_CONFIRM=Xác nhận không được để trống. Vui lòng nhập lại.
+INVALID_CONFIRM=Xác nhận không hợp lệ. Vui lòng nhập Y hoặc N.
+FILE_IO=Lỗi đọc/ghi file: 
+EMPTY_DOC_ID=Mã bác sĩ không được để trống. Vui lòng nhập lại.
+DUPLICATE_DOC_ID=Mã bác sĩ đã tồn tại. Vui lòng nhập mã khác.
+EMPTY_DOC_NAME=Tên bác sĩ không được để trống. Vui lòng nhập lại.
+EMPTY_ADDRESS=Địa chỉ không được để trống. Vui lòng nhập lại.
+INVALID_DEPT_FK=Mã khoa không tồn tại. Vui lòng nhập mã khoa đã có.
+ADD_DOC_FAIL=Thêm bác sĩ thất bại.
+EMPTY_DOC_LIST=Danh sách bác sĩ hiện tại đang trống!! 
+
+# --- Menu / prompt ---
+MENU_TITLE==== QUẢN LÝ BỆNH VIỆN ===
+MENU_DEPT=1. Quản lý khoa
+MENU_DOCTOR=2. Quản lý bác sĩ
+MENU_TEST=3. Test validation
+MENU_LANGUAGE=4. Đổi ngôn ngữ
+MENU_EXIT=0. Thoát
+SUBMENU_DEPT_TITLE=--- QUẢN LÝ KHOA ---
+SUBMENU_DEPT_ADD=1. Thêm khoa
+SUBMENU_DOC_TITLE=--- QUẢN LÝ BÁC SĨ ---
+SUBMENU_DOC_ADD=1. Thêm bác sĩ
+SUBMENU_BACK=0. Quay lại
+PROMPT_CHOICE=Chọn chức năng: 
+GOODBYE=Tạm biệt.
+ADD_DEPT_TITLE=--- THÊM KHOA ---
+PROMPT_DEPT_ID=Nhập mã khoa: 
+PROMPT_DEPT_NAME=Nhập tên khoa: 
+ADD_DEPT_SUCCESS=Thêm khoa thành công. Ngày tạo: 
+ADD_DOC_TITLE=--- THÊM BÁC SĨ ---
+PROMPT_DOC_ID=Nhập mã bác sĩ: 
+PROMPT_DOC_NAME=Nhập tên bác sĩ: 
+PROMPT_DOC_SEX=Nhập giới tính (Nam/Nu hoặc Male/Female): 
+PROMPT_DOC_ADDRESS=Nhập địa chỉ: 
+PROMPT_DOC_DEPT_ID=Nhập mã khoa (phải đã tồn tại): 
+ADD_DOC_SUCCESS=Thêm bác sĩ thành công. Ngày tạo: 
+TEST_TITLE==== TEST NHẬP LIỆU ===
+PROMPT_TEST_NAME=Nhập tên (không được trống): 
+LABEL_ENTERED_NAME=Tên đã nhập: 
+PROMPT_TEST_GENDER=Nhập giới tính (Nam/Nu hoặc Male/Female): 
+LABEL_ENTERED_GENDER=Giới tính đã nhập: 
+PROMPT_TEST_CONFIRM=Bạn có muốn tiếp tục? (Y/N): 
+LABEL_CONFIRMATION=Xác nhận: 
+LABEL_ACCEPTED=Đồng ý
+LABEL_DECLINED=Từ chối
+LABEL_DATE_FORMAT=Định dạng ngày hiện tại: 
+TABLE_DEPT_ID=MÃ KHOA
+TABLE_DEPT_NAME=TÊN KHOA
+TABLE_CREATE_DATE=NGÀY TẠO
+TABLE_UPDATE_DATE=CẬP NHẬT
+TABLE_DOC_ID=MÃ BÁC SĨ
+TABLE_DOC_NAME=TÊN BÁC SĨ
+TABLE_SEX=GT
+TABLE_ADDRESS=ĐỊA CHỈ
+
+# --- Chọn ngôn ngữ ---
+LANG_TITLE=NGÔN NGỮ
+LANG_OPTION_VI=Tiếng Việt
+LANG_OPTION_EN=English
+LANG_PROMPT=Lựa chọn: 
+LANG_SELECTED=Đã chọn Tiếng Việt.
+LANG_INVALID=Lựa chọn không hợp lệ.
