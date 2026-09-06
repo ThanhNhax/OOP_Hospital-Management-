@@ -25,3 +25,15 @@
 - Sửa DeptMan kế thừa BaseMan, chỉ còn hàm update và showInfo cần viết riêng.
 - Thêm DocMan
 - DeptMan thêm hasDoctor -> deleteDepartment -> không xóa dept còn doc.
+
+### P2:
+- Bổ sung DocMan:
+    + thêm outputDoc để duyệt nếu ds trống và tạo nhanh bảng để chuẩn bị in docInfo
+    + thêm searchByName dùng contains để so sánh tên trong list và nameKey.
+- Bổ sung DeptMan:
+    + thêm outputDept để duyệt nếu ds trống và tạo nhanh bảng để chuẩn bị in docInfo
+    + thêm displayDeptByID dùng lại findByID để tìm dept có chứa ID cần tìm và in ra.
+- Tách hàm in -> tạo isEmptyList trong BaseMan để kiểm tra list trống
+- Đặt lại tên cho output -> printHeader() để in tiêu đề dạng bảng
+- Sửa lại logic in của DeptMan và DocMan để tránh lặp code.
+- Sửa DeptMan: đưa phần xóa Dept vào handle, chỉ giữ lại has_doctor để kiểm tra doctor tồn tại => sửa hàm deleteDepartment thành hasDoctor()

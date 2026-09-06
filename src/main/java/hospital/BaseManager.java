@@ -71,4 +71,14 @@ public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
             Validator.Notice("Loi: " + e.getMessage());
         }
     }
+
+    // Kiểm tra list trống -> hỗ trợ in và các việc update/xóa
+    public boolean isEmptyList(String errorMsg){
+        // Nếu trong list rỗng -> chỉ in thông báo ds trống
+        if (list.isEmpty()) { // list nằm ở BaseMan
+            Validator.Notice(errorMsg);
+            return true;
+        }
+        return false;
+    }
 }

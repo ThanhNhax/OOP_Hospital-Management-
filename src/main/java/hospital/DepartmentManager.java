@@ -24,31 +24,41 @@ public class DepartmentManager extends BaseManager<Department>{ // Nghĩa là De
         return false; // Nếu không thì return false.
     }
 
-    // Hàm in showAll()
-    @Override public void showAll(){
-        // Nếu trong list rỗng -> chỉ in thông báo ds trống
-        if (list.isEmpty()) { // list nằm ở BaseMan
-            Validator.Notice("Danh sach phong ban trong!!");
-            return; // dừng luôn.
-        }
-
-        // Nếu không thì in tiêu đề dạng bảng
+    // === Hàm in
+    // 1. printHeader -> in ra mẫu tiêu đề dạng bảng, không cần kiểm tra trống -> sẽ làm ở bước thực thi
+    public void printHeader(){
         // Dùng printf để đặt format tương tự String.format
         System.out.printf("| %-15s | %-30s | %-12s | %-12s |\n", "DEPARTMENT ID", "DEPARTMENT NAME", "CREATE DATE", "UPDATE DATE");
-        // Gọi showInfo trong Department để in đúng theo bảng các thông tin trong list
+    }
+    // 2. showAll()
+    @Override public void showAll(){
+        // 1. Kiểm tra trống
+        if (isEmptyList("Danh sach phong ban trong!!")) return; // Dừng luôn
+        // Nếu không trống
+        // 2. In tiêu đề
+        printHeader();
+        // 3. In list info.
         for (Department dept : list) dept.showInfo();
     }
-
-    // Thêm has_doctor kiểm tra nếu có doctor thì không được xóa.
-    public boolean deleteDepartment(String deptID, DoctorManager docMan){
-        // Duyệt trong docList, nếu vẫn có deptID trùng với deptID đang cần xóa -> có doc -> không xóa -> false
-        for (Doctor doc : docMan.getlist()){
-            if (doc.getDepartmentID().equalsIgnoreCase(deptID)){
-                Validator.Notice("Loi: Van con bac si trong phong ban nay, khong the xoa!!");
-                return false;
-            }
+    // 3. Tìm dept theo ID và in ra chi tiết
+    public void displayDeparmtentByID(String id){
+        // Tạo dept kiểu dept để tìm dept có ID 
+        Department dept = findByID(id);
+        // Nếu dept != null -> tìm thấy -> in ra => có dept <=> list không trống, không cần kiểm tra.
+        if (dept != null){
+            printHeader();
+            dept.showInfo(); // in ra infor của dòng dept đó
         }
-        // Nếu không có -> xóa
-        return super.delete(deptID); // Dùng delete ở BaseMan để xóa dept khỏi list.
+        // Else -> không có deptID đó -> báo lỗi
+        else Validator.Notice("Khong tim thay phong ban co ID: " + id);
+    }
+
+    // =====
+    // Thêm has_doctor để kiểm tra nếu có doctor thì không được xóa.
+    public boolean hasDoctor(String deptID, DoctorManager docMan){
+        // Duyệt trong docList, nếu vẫn có deptID trùng với deptID đang cần xóa -> có doc -> true
+        for (Doctor doc : docMan.getlist()) if (doc.getDepartmentID().equalsIgnoreCase(deptID)) return true;
+        // Nếu không có -> false.
+        return false;
     }
 }
