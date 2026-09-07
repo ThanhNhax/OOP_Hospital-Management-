@@ -1,56 +1,135 @@
 package hospital;
 
+import java.util.Date;
+import util.Language;
+import util.ConsoleHelper;
+import util.Validation;
 import util.Validator;
 
-// DocMan kế thừa từ BaseMan
-public class DoctorManager extends BaseManager<Doctor>{
-    // list ở đây tự hiểu là docList, hàm findByID tự hiểu duyệt trên docList
-    @Override public boolean update(Doctor doc){
-        // Kiểm tra docID cần update có tồn tại
-        Doctor updateDoc = findByID(doc.getDoctorID()); // Nếu không tìm thấy -> không có doc cần update
-        if (updateDoc != null){
-            updateDoc.setName(doc.getName()); // Set tên doc mới
-            updateDoc.setSex(doc.getSex()); // Set giới tính mới
-            updateDoc.setAddress(doc.getAddress());
-            updateDoc.setDepartmentID(doc.getDepartmentID()); // Lấy deptID mới của Doc
-            updateDoc.setLastUpdateDate(doc.getLastUpdateDate());
-            return true;
+public class DoctorManager extends BaseManager<Doctor> {
+    private DepartmentManager deptManager;
+
+    public DoctorManager(DepartmentManager deptManager) {
+        this.deptManager = deptManager;
+    }
+
+    public boolean isValidDepartmentID(String deptID) {
+        return deptManager != null && deptManager.findByID(deptID) != null;
+    }
+
+    @Override
+    public boolean add(Doctor doc) {
+        if (doc == null || isDuplicateID(doc.getDoctorID()) || !isValidDepartmentID(doc.getDepartmentID())) {
+            return false;
         }
-        return false;
+        return list.add(doc);
     }
 
-    // === Hàm in
-    // 1. Tạo tiêu đề bảng của Doctor để dùng nhanh
-    public void printHeader(){
-        System.out.printf("| %-15s | %-30s | %-7s | %-50s | %-15s | %-12s | %-12s |\n", "DOCTOR ID", "DOCTOR NAME", "SEX", "ADDRESS", "DEPT ID", "CREATE DATE", "UPDATE DATE");
+    public void addFromInput() {
+        System.out.println(Language.get(Language.ADD_DOC_TITLE));
+
+        if (deptManager.getlist().isEmpty()) {
+            ConsoleHelper.printNotice(Language.get(Language.EMPTY_DEPT_LIST));
+            return;
+        }
+
+        String id;
+        while (true) {
+            id = Validation.readNonEmptyString(
+                    Language.get(Language.PROMPT_DOC_ID),
+                    Language.EMPTY_DOC_ID);
+            if (isDuplicateID(id)) {
+                ConsoleHelper.printNotice(Language.get(Language.DUPLICATE_DOC_ID));
+            } else {
+                break;
+            }
+        }
+
+        String name = Validation.readNonEmptyString(
+                Language.get(Language.PROMPT_DOC_NAME),
+                Language.EMPTY_DOC_NAME);
+        String sex = Validation.readGender(
+                Language.get(Language.PROMPT_DOC_SEX),
+                Language.EMPTY_GENDER);
+        String address = Validation.readNonEmptyString(
+                Language.get(Language.PROMPT_DOC_ADDRESS),
+                Language.EMPTY_ADDRESS);
+
+        String deptID;
+        while (true) {
+            deptID = Validation.readNonEmptyString(
+                    Language.get(Language.PROMPT_DOC_DEPT_ID),
+                    Language.EMPTY_DEPT_ID);
+            if (!isValidDepartmentID(deptID)) {
+                ConsoleHelper.printNotice(Language.get(Language.INVALID_DEPT_FK));
+            } else {
+                break;
+            }
+        }
+
+        Date createDate = new Date();
+        Doctor doc = new Doctor(id, name, sex, address, deptID, createDate, null);
+
+        if (add(doc)) {
+            ConsoleHelper.printNotice(Language.get(Language.ADD_DOC_SUCCESS) + Validation.formatDate(createDate));
+            showAll();
+        } else {
+            ConsoleHelper.printNotice(Language.get(Language.ADD_DOC_FAIL));
+        }
     }
 
-    @Override public void showAll(){
-        // Kiểm tra list trống thì dừng luôn
-        if (isEmptyList("Danh sach bac si trong!!")) return;
-        // không thì in tiêu đề
+    @Override
+    public boolean update(Doctor doc) {
+        Doctor updateDoc = findByID(doc.getDoctorID());
+        if (updateDoc == null) {
+            return false;
+        }
+        if (!isValidDepartmentID(doc.getDepartmentID())) {
+            return false;
+        }
+        updateDoc.setName(doc.getName());
+        updateDoc.setSex(doc.getSex());
+        updateDoc.setAddress(doc.getAddress());
+        updateDoc.setDepartmentID(doc.getDepartmentID());
+        updateDoc.setLastUpdateDate(doc.getLastUpdateDate());
+        return true;
+    }
+
+    public void printHeader() {
+        System.out.printf("| %-15s | %-30s | %-7s | %-50s | %-15s | %-12s | %-12s |\n",
+                Language.get(Language.TABLE_DOC_ID),
+                Language.get(Language.TABLE_DOC_NAME),
+                Language.get(Language.TABLE_SEX),
+                Language.get(Language.TABLE_ADDRESS),
+                Language.get(Language.TABLE_DEPT_ID),
+                Language.get(Language.TABLE_CREATE_DATE),
+                Language.get(Language.TABLE_UPDATE_DATE));
+    }
+
+    @Override
+    public void showAll() {
+        if (list.isEmpty()) {
+            ConsoleHelper.printNotice(Language.get(Language.EMPTY_DOC_LIST));
+            return;
+        }
         printHeader();
-        for (Doctor doc : list) doc.showInfo(); // In ra từng dòng info.
+        for (Doctor doc : list) {
+            doc.showInfo();
+        }
     }
 
-    // Thêm tìm Doc bằng tên
-    public void searchByName(String namekey){
-        // Đặt kết quả tìm ban đầu là false
+    public void searchByName(String namekey) {
         boolean found = false;
-        // Duyệt doc cần tìm trong list
-        for (Doctor doc: list){
-            if (doc.getDoctorName().toLowerCase().contains(namekey.toLowerCase())){ // Dùng contains để kiểm tra xem chuỗi trong getDoctorName (tên doc đang có trong list) có chứa chuỗi con namekey (từ khóa tên cần tìm) hay không.
-                // Dùng !found để chỉ in dòng tiêu đề 1 lần -> chuyển sang true
-                if (!found){
+        for (Doctor doc : list) {
+            if (doc.getDoctorName().toLowerCase().contains(namekey.toLowerCase())) {
+                if (!found) {
                     printHeader();
                     found = true;
                 }
-                // sau đó chỉ in nội dung thông tin bác sĩ
                 doc.showInfo();
             }
         }
-        // Nếu hết vòng vẫn không tìm thấy bác sĩ nào -> vẫn false -> thông báo
-        if (!found){
+        if (!found) {
             Validator.Notice("Khong tim thay bac si nao chua tu khoa: " + namekey);
         }
     }

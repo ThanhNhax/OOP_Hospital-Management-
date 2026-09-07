@@ -19,6 +19,19 @@
     </dependencies>
 
     <build>
+        <!-- Đóng gói lang/*.txt vào jar tại đường dẫn lang/ -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+            <resource>
+                <directory>lang</directory>
+                <targetPath>lang</targetPath>
+                <includes>
+                    <include>*.txt</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
             <!-- Maven Compiler Plugin cấu hình biên dịch UTF-8 và phiên bản Java -->
             <plugin>
@@ -29,6 +42,19 @@
                     <source>17</source>
                     <target>17</target>
                     <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- File jar chạy được: java -jar ... -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>hospital.Main</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>
