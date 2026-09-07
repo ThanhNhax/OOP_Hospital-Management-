@@ -1,3 +1,4 @@
+### rp_log.md
 # 30/8: bắt đầu viết code.
 - Viết xong Department.java
 
@@ -37,3 +38,14 @@
 - Đặt lại tên cho output -> printHeader() để in tiêu đề dạng bảng
 - Sửa lại logic in của DeptMan và DocMan để tránh lặp code.
 - Sửa DeptMan: đưa phần xóa Dept vào handle, chỉ giữ lại has_doctor để kiểm tra doctor tồn tại => sửa hàm deleteDepartment thành hasDoctor()
+
+### P3:
+- Viết lớp HosHandle:
+    + Xong HandleAddNew: dept, doc
+    + Xong HandleDelete: dept, doc
+    + Xong handleDisplay: In toàn bộ Dept, Doc
+    + Xong handleSearch: Tim DeptByID, DocByName.
+    + Xong HandleUpdate: handleUpdateDept và handleUpdateDoc
+    + Xong handleSaveToFile -> tính năng khi user chọn
+    + Auto Save mỗi khi có thay đổi: thêm/xóa/sửa thành công.
+- Viết lớp Main gọi lại các handle.
