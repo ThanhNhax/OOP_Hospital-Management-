@@ -88,4 +88,41 @@ public class DepartmentManager extends BaseManager<Department> {
         }
         return false;
     }
+
+    public void updateFromInput() {
+        String id = Validation.readNonEmptyString(Language.get(Language.PROMPT_UPDATE_ID), Language.EMPTY_DEPT_ID);
+        Department dept = findByID(id);
+        if (dept == null) {
+            ConsoleHelper.printNotice(Language.get(Language.NOT_FOUND));
+            return;
+        }
+        String name = Validation.readNonEmptyString(Language.get(Language.PROMPT_DEPT_NAME), Language.EMPTY_DEPT_NAME);
+        dept.setName(name);
+        dept.setLastUpdateDate(new Date());
+        ConsoleHelper.printNotice(Language.get(Language.UPDATE_SUCCESS));
+    }
+
+    public void deleteFromInput(DoctorManager docMan) {
+        String id = Validation.readNonEmptyString(Language.get(Language.PROMPT_DELETE_ID), Language.EMPTY_DEPT_ID);
+        if (hasDoctor(id, docMan)) {
+            ConsoleHelper.printNotice(Language.get(Language.DELETE_FAIL));
+            return;
+        }
+        if (delete(id)) {
+            ConsoleHelper.printNotice(Language.get(Language.DELETE_SUCCESS));
+        } else {
+            ConsoleHelper.printNotice(Language.get(Language.DELETE_FAIL));
+        }
+    }
+
+    public void searchFromInput() {
+        String id = Validation.readNonEmptyString(Language.get(Language.PROMPT_SEARCH_ID), Language.EMPTY_DEPT_ID);
+        Department dept = findByID(id);
+        if (dept != null) {
+            printHeader();
+            dept.showInfo();
+        } else {
+            ConsoleHelper.printNotice(Language.get(Language.NOT_FOUND));
+        }
+    }
 }

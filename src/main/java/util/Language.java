@@ -16,16 +16,17 @@ public class Language {
 
     // --- Mã UI (trùng tên trong lang/vi.txt và lang/en.txt) ---
     public static final String MENU_TITLE = "MENU_TITLE";
-    public static final String MENU_DEPT = "MENU_DEPT";
-    public static final String MENU_DOCTOR = "MENU_DOCTOR";
-    public static final String MENU_TEST = "MENU_TEST";
+    public static final String MENU_BUILD_DATA = "MENU_BUILD_DATA";
+    public static final String MENU_SHOW = "MENU_SHOW";
+    public static final String MENU_ADD = "MENU_ADD";
+    public static final String MENU_UPDATE = "MENU_UPDATE";
+    public static final String MENU_DELETE = "MENU_DELETE";
+    public static final String MENU_SEARCH = "MENU_SEARCH";
+    public static final String MENU_STORE_DATA = "MENU_STORE_DATA";
     public static final String MENU_LANGUAGE = "MENU_LANGUAGE";
     public static final String MENU_EXIT = "MENU_EXIT";
-    public static final String SUBMENU_DEPT_TITLE = "SUBMENU_DEPT_TITLE";
-    public static final String SUBMENU_DEPT_ADD = "SUBMENU_DEPT_ADD";
-    public static final String SUBMENU_DOC_TITLE = "SUBMENU_DOC_TITLE";
-    public static final String SUBMENU_DOC_ADD = "SUBMENU_DOC_ADD";
-    public static final String SUBMENU_DOC_SHOW = "SUBMENU_DOC_SHOW";
+    public static final String SUBMENU_DOC_OPT = "SUBMENU_DOC_OPT";
+    public static final String SUBMENU_DEPT_OPT = "SUBMENU_DEPT_OPT";
     public static final String SUBMENU_BACK = "SUBMENU_BACK";
     public static final String PROMPT_CHOICE = "PROMPT_CHOICE";
     public static final String GOODBYE = "GOODBYE";
@@ -64,6 +65,16 @@ public class Language {
     public static final String LANG_PROMPT = "LANG_PROMPT";
     public static final String LANG_SELECTED = "LANG_SELECTED";
     public static final String LANG_INVALID = "LANG_INVALID";
+
+    public static final String PROMPT_UPDATE_ID = "PROMPT_UPDATE_ID";
+    public static final String PROMPT_DELETE_ID = "PROMPT_DELETE_ID";
+    public static final String PROMPT_SEARCH_NAME = "PROMPT_SEARCH_NAME";
+    public static final String PROMPT_SEARCH_ID = "PROMPT_SEARCH_ID";
+    public static final String NOT_FOUND = "NOT_FOUND";
+    public static final String DELETE_SUCCESS = "DELETE_SUCCESS";
+    public static final String DELETE_FAIL = "DELETE_FAIL";
+    public static final String UPDATE_SUCCESS = "UPDATE_SUCCESS";
+    public static final String UPDATE_FAIL = "UPDATE_FAIL";
 
     // --- Mã lỗi (trùng tên trong file ngôn ngữ) ---
     public static final String UNKNOWN = "UNKNOWN";

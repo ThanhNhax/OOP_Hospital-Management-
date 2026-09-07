@@ -130,7 +130,52 @@ public class DoctorManager extends BaseManager<Doctor> {
             }
         }
         if (!found) {
-            Validator.Notice("Khong tim thay bac si nao chua tu khoa: " + namekey);
+            ConsoleHelper.printNotice(Language.get(Language.NOT_FOUND));
         }
+    }
+
+    public void updateFromInput() {
+        String id = Validation.readNonEmptyString(Language.get(Language.PROMPT_UPDATE_ID), Language.EMPTY_DOC_ID);
+        Doctor updateDoc = findByID(id);
+        if (updateDoc == null) {
+            ConsoleHelper.printNotice(Language.get(Language.NOT_FOUND));
+            return;
+        }
+
+        String name = Validation.readNonEmptyString(Language.get(Language.PROMPT_DOC_NAME), Language.EMPTY_DOC_NAME);
+        String sex = Validation.readGender(Language.get(Language.PROMPT_DOC_SEX), Language.EMPTY_GENDER);
+        String address = Validation.readNonEmptyString(Language.get(Language.PROMPT_DOC_ADDRESS), Language.EMPTY_ADDRESS);
+
+        String deptID;
+        while (true) {
+            deptID = Validation.readNonEmptyString(Language.get(Language.PROMPT_DOC_DEPT_ID), Language.EMPTY_DEPT_ID);
+            if (!isValidDepartmentID(deptID)) {
+                ConsoleHelper.printNotice(Language.get(Language.INVALID_DEPT_FK));
+            } else {
+                break;
+            }
+        }
+
+        updateDoc.setName(name);
+        updateDoc.setSex(sex);
+        updateDoc.setAddress(address);
+        updateDoc.setDepartmentID(deptID);
+        updateDoc.setLastUpdateDate(new Date());
+
+        ConsoleHelper.printNotice(Language.get(Language.UPDATE_SUCCESS));
+    }
+
+    public void deleteFromInput() {
+        String id = Validation.readNonEmptyString(Language.get(Language.PROMPT_DELETE_ID), Language.EMPTY_DOC_ID);
+        if (delete(id)) {
+            ConsoleHelper.printNotice(Language.get(Language.DELETE_SUCCESS));
+        } else {
+            ConsoleHelper.printNotice(Language.get(Language.DELETE_FAIL));
+        }
+    }
+
+    public void searchFromInput() {
+        String name = Validation.readNonEmptyString(Language.get(Language.PROMPT_SEARCH_NAME), Language.EMPTY_NAME);
+        searchByName(name);
     }
 }

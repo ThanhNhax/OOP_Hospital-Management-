@@ -27,16 +27,16 @@ EMPTY_DOC_LIST=The doctor list is currently empty!!
 
 # --- Menu / prompt ---
 MENU_TITLE==== HOSPITAL MANAGEMENT ===
-MENU_DEPT=1. Department management
-MENU_DOCTOR=2. Doctor management
-MENU_TEST=3. Test validation
-MENU_LANGUAGE=4. Change language
+MENU_SHOW=1. Show information
+MENU_ADD=2. Add new
+MENU_UPDATE=3. Update information
+MENU_DELETE=4. Delete
+MENU_SEARCH=5. Search information
+MENU_BUILD_DATA=6. File I/O (Store / Load)
+MENU_LANGUAGE=8. Change language
 MENU_EXIT=0. Exit
-SUBMENU_DEPT_TITLE=--- DEPARTMENT MANAGEMENT ---
-SUBMENU_DEPT_ADD=1. Add department
-SUBMENU_DOC_TITLE=--- DOCTOR MANAGEMENT ---
-SUBMENU_DOC_ADD=1. Add doctor
-SUBMENU_DOC_SHOW=2. Display doctor list
+SUBMENU_DOC_OPT=1. Doctor
+SUBMENU_DEPT_OPT=2. Department
 SUBMENU_BACK=0. Back
 PROMPT_CHOICE=Select an option: 
 GOODBYE=Goodbye.
@@ -77,3 +77,14 @@ LANG_OPTION_EN=English
 LANG_PROMPT=Your choice: 
 LANG_SELECTED=English selected.
 LANG_INVALID=Invalid choice.
+
+# --- Action Messages ---
+PROMPT_UPDATE_ID=Enter ID to update: 
+PROMPT_DELETE_ID=Enter ID to delete: 
+PROMPT_SEARCH_NAME=Enter name to search: 
+PROMPT_SEARCH_ID=Enter ID to search: 
+NOT_FOUND=Information not found.
+DELETE_SUCCESS=Deleted successfully.
+DELETE_FAIL=Delete failed (ID does not exist or data is in use).
+UPDATE_SUCCESS=Updated successfully.
+UPDATE_FAIL=Update failed.
