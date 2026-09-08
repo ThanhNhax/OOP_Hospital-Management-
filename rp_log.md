@@ -49,3 +49,6 @@
     + Xong handleSaveToFile -> tính năng khi user chọn
     + Auto Save mỗi khi có thay đổi: thêm/xóa/sửa thành công.
 - Viết lớp Main gọi lại các handle.
+
+# 8/9:
+- Bỏ confirm khi back main menu ở submenu

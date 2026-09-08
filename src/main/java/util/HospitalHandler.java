@@ -29,11 +29,7 @@ public class HospitalHandler {
             // Nhập Choose để chọn số
             String Choose = Validator.readNonEmptyString("Choose (0-2): ");
             // Nếu chọn 0 thì return để thoát luôn
-            if (Choose.equals("0")) {
-                // Xác nhận thoát thì return
-                boolean isExit = Validator.readConfirm("Nhap 'Y' hoặc 'Yes' de thoat, 'N' hoac 'No' de chon lai!");
-                if (isExit) return; // Nếu true thì thoát khỏi vòng lặp -> quay về MainMenu. Nếu false thì trở lại menu ADD NEW
-            }
+            if (Choose.equals("0")) return;
             else if (Choose.equals("1")){
                 // Thêm Department => bắt buộc DeptID không trùng
                 String deptID = Validator.readPattenString("Nhap Department ID: ", id -> !deptMan.isDuplicateID(id), "Loi: DepartmentID da ton tai!!");
@@ -80,10 +76,7 @@ public class HospitalHandler {
             // Nhập Choose để chọn số
             String Choose = Validator.readNonEmptyString("Choose (0-2): ");
             // Nếu chọn 0 thì return để thoát luôn
-            if (Choose.equals("0")) {
-                boolean isExit = Validator.readConfirm("Nhap 'Y' hoặc 'Yes' de thoat, 'N' hoac 'No' de chon lai!");
-                if (isExit) return;
-            }
+            if (Choose.equals("0")) return;
             // 1. Xóa dept -> điều kiện ràng buộc: không được xóa nếu còn doc
             else if (Choose.equals("1")){
                 // Tìm dept ID có tồn tại
@@ -124,10 +117,7 @@ public class HospitalHandler {
             // Nhập Choose để chọn số
             String Choose = Validator.readNonEmptyString("Choose (0-2): ");
             // Nếu chọn 0 thì return để thoát luôn
-            if (Choose.equals("0")) {
-                boolean isExit = Validator.readConfirm("Nhap 'Y' hoặc 'Yes' de thoat, 'N' hoac 'No' de chon lai!");
-                if (isExit) return;
-            }
+            if (Choose.equals("0")) return;
             else if (Choose.equals("1")) deptMan.showAll();
             else if (Choose.equals("2")) docMan.showAll();
             else Validator.Notice("Loi: Vui long chi nhap tu 0-2!!");
@@ -142,10 +132,7 @@ public class HospitalHandler {
             // Nhập Choose để chọn số
             String Choose = Validator.readNonEmptyString("Choose (0-2): ");
             // Nếu chọn 0 thì return để thoát luôn
-            if (Choose.equals("0")) {
-                boolean isExit = Validator.readConfirm("Nhap 'Y' hoặc 'Yes' de thoat, 'N' hoac 'No' de chon lai!");
-                if (isExit) return;
-            }
+            if (Choose.equals("0")) return;
             else if (Choose.equals("1")) {
                 // displayDeptID goi findByID -> null bao khong co; else in ra
                 // Nhập ID muốn search
@@ -233,10 +220,7 @@ public class HospitalHandler {
             // Nhập Choose để chọn số
             String Choose = Validator.readNonEmptyString("Choose (0-2): ");
             // Nếu chọn 0 thì return để thoát luôn
-            if (Choose.equals("0")) {
-                boolean isExit = Validator.readConfirm("Nhap 'Y' hoặc 'Yes' de thoat, 'N' hoac 'No' de chon lai!");
-                if (isExit) return;
-            }       
+            if (Choose.equals("0")) return;
             else if (Choose.equals("1")) handleUpdateDept();
             else if (Choose.equals("2")) handleUpdateDoc();
             else Validator.Notice("Loi: Vui long chi nhap tu 0-2!!");
