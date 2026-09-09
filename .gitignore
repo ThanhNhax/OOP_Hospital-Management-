@@ -1,0 +1,23 @@
+# Thư mục sinh ra khi build bằng Maven
+target/
+
+# Các file và thư mục của IDE IntelliJ IDEA
+.idea/
+*.iml
+out/
+
+# Các file và thư mục của IDE Eclipse
+.metadata/
+.classpath
+.project
+.settings/
+*.tmp
+*.bak
+
+# Các file của IDE VS Code
+.vscode/
+
+# Thư mục log và các file hệ thống
+*.log
+.DS_Store
+Thumbs.db
