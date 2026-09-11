@@ -21,15 +21,19 @@ public class TechnicalEmployee extends Employee {
     @Override
     public void inputData(Scanner sc) {
         super.inputData(sc);
-        ValidationUtils.Notice("Nhập Ngôn ngữ lập trình (Language): ");
-        this.programmingLanguage = sc.nextLine().trim();
+        while (true) {
+            ValidationUtils.Notice("Enter Programming Language: ");
+            this.programmingLanguage = sc.nextLine().trim();
+            if (!this.programmingLanguage.isEmpty()) break;
+            ValidationUtils.NoticeLine("Language cannot be empty!");
+        }
     }
 
     // Ghi đè hàm updateData để cập nhật ngôn ngữ lập trình.
     @Override
     public void updateData(Scanner sc) {
         super.updateData(sc);
-        ValidationUtils.Notice("Nhập Ngôn ngữ lập trình mới (Bấm Enter để giữ nguyên [" + programmingLanguage + "]): ");
+        ValidationUtils.Notice("Enter new Programming Language (Press Enter to keep [" + programmingLanguage + "]): ");
         String inputLang = sc.nextLine().trim();
         if (!inputLang.isEmpty()) {
             this.programmingLanguage = inputLang;
@@ -40,6 +44,6 @@ public class TechnicalEmployee extends Employee {
     @Override
     public void display() {
         super.display();
-        ValidationUtils.NoticeFormat("Ngôn ngữ: %s\n", programmingLanguage);
+        ValidationUtils.NoticeFormat(" | Language: %s\n", programmingLanguage);
     }
 }

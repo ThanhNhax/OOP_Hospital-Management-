@@ -47,40 +47,43 @@ public abstract class Employee {
     // Hàm nhập dữ liệu dùng chung cho nhân viên.
     // Gom nhóm logic nhập và kiểm tra dữ liệu hợp lệ (Data Validation) ngay khi người dùng thao tác.
     public void inputData(Scanner sc) {
-        ValidationUtils.Notice("Nhập ID: ");
-        this.id = sc.nextLine().trim(); // trim() để loại bỏ khoảng trắng thừa ở đầu/cuối
+        // ID input has been moved to EmployeeManager for early uniqueness check.
 
-        System.out.print("Nhập Họ tên: ");
-        this.name = sc.nextLine().trim();
+        while (true) {
+            ValidationUtils.Notice("Enter Full Name: ");
+            this.name = sc.nextLine().trim();
+            if (!this.name.isEmpty()) break;
+            ValidationUtils.NoticeLine("Name cannot be empty!");
+        }
 
         // Vòng lặp kiểm tra định dạng email.
         // Ép người dùng nhập lại cho đến khi email hợp lệ mới cho tiếp tục.
         while (true) {
-            ValidationUtils.Notice("Nhập Email: ");
+            ValidationUtils.Notice("Enter Email: ");
             String inputEmail = sc.nextLine().trim();
-            if (ValidationUtils.isValidEmail(inputEmail)) { // Gọi hàm hỗ trợ từ ValidationUtils
+            if (ValidationUtils.isValidEmail(inputEmail)) { 
                 this.email = inputEmail;
-                break; // Đúng định dạng thì thoát vòng lặp
+                break; 
             }
-            ValidationUtils.NoticeLine("Email không hợp lệ! Vui lòng nhập lại (ví dụ: abc@gmail.com).");
+            ValidationUtils.NoticeLine("Invalid email! Please enter again (e.g., abc@gmail.com).");
         }
 
         // Vòng lặp kiểm tra số điện thoại.
         // Đảm bảo SĐT đủ 10-11 chữ số theo đúng yêu cầu bài toán.
         while (true) {
-            ValidationUtils.Notice("Nhập Số điện thoại (10-11 số): ");
+            ValidationUtils.Notice("Enter Phone Number (10-11 digits): ");
             String inputPhone = sc.nextLine().trim();
             if (ValidationUtils.isValidPhone(inputPhone)) {
                 this.phoneNumber = inputPhone;
                 break;
             }
-            ValidationUtils.NoticeLine("Số điện thoại không hợp lệ! Phải gồm 10 đến 11 chữ số.");
+            ValidationUtils.NoticeLine("Invalid phone number! Must be 10 to 11 digits.");
         }
 
         // Vòng lặp kiểm tra lương.
         // Bắt lỗi ngoại lệ NumberFormatException nếu người dùng nhập chữ thay vì nhập số.
         while (true) {
-            ValidationUtils.NoticeLine("Nhập Lương (> 0): ");
+            ValidationUtils.Notice("Enter Salary (> 0): ");
             try {
                 double inputSalary = Double.parseDouble(sc.nextLine().trim());
                 if (inputSalary > 0) {
@@ -88,45 +91,44 @@ public abstract class Employee {
                     break;
                 }
             } catch (NumberFormatException e) {
-                // Tránh lỗi dừng chương trình đột ngột khi nhập sai kiểu dữ liệu
             }
-            ValidationUtils.NoticeLine("Lương phải lớn hơn 0!");
+            ValidationUtils.NoticeLine("Salary must be greater than 0!");
         }
     }
 
     // Hàm cập nhật thông tin nhân viên.
     // Đáp ứng yêu cầu "Nếu nhấn Enter (để trống) thì giữ nguyên giá trị cũ".
     public void updateData(Scanner sc) {
-        ValidationUtils.Notice("Nhập Họ tên mới (Nhấn Enter để giữ nguyên [" + name + "]): ");
+        ValidationUtils.Notice("Enter new Name (Press Enter to keep [" + name + "]): ");
         String inputName = sc.nextLine().trim();
-        if (!inputName.isEmpty()) this.name = inputName; // Chỉ cập nhật khi chuỗi không rỗng
+        if (!inputName.isEmpty()) this.name = inputName; 
 
         while (true) {
-            ValidationUtils.Notice("Nhập Email mới (Nhấn Enter để giữ nguyên [" + email + "]): ");
+            ValidationUtils.Notice("Enter new Email (Press Enter to keep [" + email + "]): ");
             String inputEmail = sc.nextLine().trim();
-            if (inputEmail.isEmpty()) break; // Nhấn Enter -> Bỏ qua và giữ nguyên email cũ
+            if (inputEmail.isEmpty()) break; 
             if (ValidationUtils.isValidEmail(inputEmail)) {
                 this.email = inputEmail;
                 break;
             }
-            ValidationUtils.NoticeLine("Email không hợp lệ!");
+            ValidationUtils.NoticeLine("Invalid email!");
         }
 
         while (true) {
-            ValidationUtils.Notice("Nhập Số điện thoại mới (Nhấn Enter để giữ nguyên [" + phoneNumber + "]): ");
+            ValidationUtils.Notice("Enter new Phone Number (Press Enter to keep [" + phoneNumber + "]): ");
             String inputPhone = sc.nextLine().trim();
-            if (inputPhone.isEmpty()) break; // Nhấn Enter -> Bỏ qua
+            if (inputPhone.isEmpty()) break; 
             if (ValidationUtils.isValidPhone(inputPhone)) {
                 this.phoneNumber = inputPhone;
                 break;
             }
-            ValidationUtils.NoticeLine("Số điện thoại không hợp lệ!");
+            ValidationUtils.NoticeLine("Invalid phone number!");
         }
 
         while (true) {
-            ValidationUtils.Notice("Nhập Lương mới (Nhấn Enter để giữ nguyên [" + salary + "]): ");
+            ValidationUtils.Notice("Enter new Salary (Press Enter to keep [" + salary + "]): ");
             String inputSalaryStr = sc.nextLine().trim();
-            if (inputSalaryStr.isEmpty()) break; // Nhấn Enter -> Bỏ qua
+            if (inputSalaryStr.isEmpty()) break; 
             try {
                 double inputSalary = Double.parseDouble(inputSalaryStr);
                 if (inputSalary > 0) {
@@ -134,16 +136,15 @@ public abstract class Employee {
                     break;
                 }
             } catch (NumberFormatException e) {
-                // Xử lý ngoại lệ số
             }
-            ValidationUtils.NoticeLine("Lương phải là số lớn hơn 0!");
+            ValidationUtils.NoticeLine("Salary must be a number greater than 0!");
         }
     }
 
     // Hiển thị thông tin cơ bản dạng dòng formatted string.
     // Căn chỉnh khoảng cách bằng %-8s, %-18s... giúp bảng thông tin thẳng hàng đẹp mắt.
     public void display() {
-        ValidationUtils.NoticeFormat("ID: %-8s | Tên: %-18s | Email: %-22s | SĐT: %-12s | Lương: %,-12.2f",
+        ValidationUtils.NoticeFormat("ID: %-8s | Name: %-18s | Email: %-22s | Phone: %-12s | Salary: %,-12.2f",
                 id, name, email, phoneNumber, salary);
     }
 }

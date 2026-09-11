@@ -22,15 +22,19 @@ public class OfficeEmployee extends Employee {
     @Override
     public void inputData(Scanner sc) {
         super.inputData(sc); // Gọi phương thức inputData của lớp cha
-        ValidationUtils.Notice("Nhập Chức vụ (Position): ");
-        this.position = sc.nextLine().trim();
+        while (true) {
+            ValidationUtils.Notice("Enter Position: ");
+            this.position = sc.nextLine().trim();
+            if (!this.position.isEmpty()) break;
+            ValidationUtils.NoticeLine("Position cannot be empty!");
+        }
     }
 
     // Ý nghĩa: Ghi đè hàm updateData để hỗ trợ sửa chức vụ.
     @Override
     public void updateData(Scanner sc) {
         super.updateData(sc); // Gọi updateData của lớp cha
-        ValidationUtils.Notice("Nhập Chức vụ mới (Bấm Enter để giữ nguyên [" + position + "]): ");
+        ValidationUtils.Notice("Enter new Position (Press Enter to keep [" + position + "]): ");
         String inputPos = sc.nextLine().trim();
         if (!inputPos.isEmpty()) {
             this.position = inputPos;
@@ -41,6 +45,6 @@ public class OfficeEmployee extends Employee {
     @Override
     public void display() {
         super.display(); // Gọi display của lớp cha
-        ValidationUtils.NoticeFormat(" | Chức vụ: %s\n", position);
+        ValidationUtils.NoticeFormat(" | Position: %s\n", position);
     }
 }

@@ -15,11 +15,11 @@ public class Main {
         // Giữ chương trình liên tục hoạt động cho đến khi người dùng chủ động chọn thoát (mục 4).
         while (true) {
             ValidationUtils.NoticeLine("\n========= EMPLOYEE MANAGEMENT MENU =========");
-            ValidationUtils.NoticeLine("1. Thêm nhân viên (Add Employee)");
-            ValidationUtils.NoticeLine("2. Cập nhật thông tin nhân viên (Update Employee)");
-            ValidationUtils.NoticeLine("3. Hiển thị danh sách nhân viên (Display List)");
-            ValidationUtils.NoticeLine("4. Thoát chương trình (Exit)");
-            ValidationUtils.Notice("Chọn chức năng (1-4): ");
+            ValidationUtils.NoticeLine("1. Add Employee");
+            ValidationUtils.NoticeLine("2. Update Employee");
+            ValidationUtils.NoticeLine("3. Display List");
+            ValidationUtils.NoticeLine("4. Exit");
+            ValidationUtils.Notice("Select an option (1-4): ");
 
             String choice = sc.nextLine().trim();
             switch (choice) {
@@ -33,11 +33,11 @@ public class Main {
                     manager.displayAllEmployees(); // Gọi xử lý hiển thị danh sách ở controller\EmploymentManager
                     break;
                 case "4":
-                    ValidationUtils.NoticeLine("Đã thoát chương trình.");
+                    ValidationUtils.NoticeLine("Exited program.");
                     sc.close(); // Đóng luồng nhập liệu Scanner
                     return; // Kết thúc hàm main, dừng chương trình
                 default:
-                    ValidationUtils.NoticeLine("Lựa chọn không hợp lệ! Vui lòng chọn từ 1 đến 4.");
+                    ValidationUtils.NoticeLine("Invalid choice! Please select from 1 to 4.");
             }
         }
     }
