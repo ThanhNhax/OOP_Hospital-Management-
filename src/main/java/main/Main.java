@@ -1,7 +1,8 @@
 package main;
 
-import util.HospitalHandler;
-import util.Validator;
+import controller.HospitalHandler;
+import view.InputValidator;
+import view.OutputViewer;
 
 public class Main {
     // Gọi hàm main để chạy theo cú pháp public static void main(String[] args) {}
@@ -10,47 +11,46 @@ public class Main {
 
         while (true) {
             // In menu
-            Validator.Notice("\n=== HOSPITAL MANAGEMENT ===");
-            Validator.Notice("1. Show information");
-            Validator.Notice("2. Add new");
-            Validator.Notice("3. Update information");
-            Validator.Notice("4. Delete");
-            Validator.Notice("5. Search information");
-            Validator.Notice("6. Store data to file");
-            Validator.Notice("0. Quit");
+            OutputViewer.printMainMenu();
             
             // Tạo biến chọn, không được rỗng
-            String choice = Validator.readNonEmptyString("Choose (0-6): ");
+            String choice = InputValidator.readNonEmptyString(null);
 
             switch (choice) {
                 case "1":
-                    handler.handleDisplay();
+                    handler.handleAddNew();
                     break;
                 case "2":
-                    handler.handleAddNew();
+                    handler.handleDelete();
                     break;
                 case "3":
                     handler.handleUpdate();
                     break;
                 case "4":
-                    handler.handleDelete();
-                    break;
-                case "5":
                     handler.handleSearch();
                     break;
+                case "5":
+                    handler.handleDisplayAPatient();
+                    break;
                 case "6":
+                    handler.handleDisplayAll();
+                    break;
+                case "7":
                     handler.handleSaveToFile();
+                    break;
+                case "8":
+                    handler.handleLoadFromFile();
                     break;
                 case "0":
                     // Xác nhận trước khi thoát
-                    boolean isExit = Validator.readConfirm("Ban co chac chan muon thoat ung dung (Y/N)?");
+                    boolean isExit = InputValidator.readConfirm("exit");
                     if (isExit) {
-                        Validator.Notice("Thoat thanh cong!!!");
+                        OutputViewer.Successfully("exit", null);
                         return;
                     }
                     break;
                 default:
-                    Validator.Notice("Loi: Vui long chon tu 0 den 6!");
+                    OutputViewer.errChoice(0,8);
             }
         }
     }

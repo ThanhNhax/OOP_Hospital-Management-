@@ -52,3 +52,27 @@
 
 # 8/9:
 - Bỏ confirm khi back main menu ở submenu
+
+# 9/9:
+- Sửa Validator: readString(), đổi về dùng Notice thay cho System.out
+
+# 22/9:
+- Chia lại folder theo MVC:
+    + baseEntity + department + doctor = model. Viết thêm Patient
+    + các Manager = manager + thêm PatientManager
+    + Validator = inputViewer -> tách formatDate ra utils + outputViewer chứa đoạn in ra MainMenu và SubMenu
+    + Handle = controller
+- Fix: outputViewer: thêm các câu báo lỗi dùng chung (dept list empty, doc list empty) và sửa cách gọi trong deptman, docman.
+
+# 23/9:
+- Xong Patient.java
+- Xong PatientManager.java
+- Thêm regex phone và đọc dateString để nhập dob trong Input: thêm parseDate để xử lý chuyển String -> Date để kiểm tra đúng, dùng formatDate đã có chuyển Date -> String để lấy được đúng ngày cần in ra.
+- thêm readUpdPhone và readUpdDate để kiểm tra đúng định dạng khi upd
+- bỏ readUpdPhone và readUpdDate -> thay bằng hàm tổng quát dùng chung radValidString để xử lý mode upd/!upd và điều kiện từng thuộc tính (nếu có)
+- PatientHandle.java: Xong thêm, xóa, update, in, search, save, load
+
+# 24/9:
+- Chỉnh Menu theo đề
+- Sửa search và display theo đề
+- Done MainMenu

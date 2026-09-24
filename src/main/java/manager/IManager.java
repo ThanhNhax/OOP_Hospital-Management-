@@ -1,4 +1,4 @@
-package hospital;
+package manager;
 
 public interface IManager<T> {
     // Không cần dùng public trước các hàm vì trong interface đã mặc định mọi phương thức là public adstract

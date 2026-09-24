@@ -1,8 +1,9 @@
-package hospital;
+package manager;
 import java.io.*; // Dùng nhiều thư viện trong io nên dùng * để lấy tất cả - không làm nặng hơn vì chỉ lấy đúng những class được sử dụng
 import java.util.ArrayList; // Để dùng mảng list. Trong pj lớn có thể import thêm List sẵn để mở rộng khi cần.
 import java.util.List;
-import util.Validator;
+import model.*;
+import view.*;
 
 // BaseManager tạo T kế thừa từ BaseEntity và thực thi IManager<T>
 public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
@@ -10,7 +11,7 @@ public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
     protected  List<T> list = new ArrayList<>();
 
     // Getter cho danh sách nếu cần lấy dùng ở ngoài
-    public List<T> getlist(){return list;}
+    public List<T> getList(){return list;}
 
     // Kiểm tra trùng ID: nếu tìm thấy ID -> true (dup), else false
     // 1. Tìm ID: vì hàm findByID gọi từ IManager -> cần Override
@@ -50,7 +51,7 @@ public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(path))){
             // gọi hàm writeObject(departmentList) để ghi danh sách departmentList ra file
             oos.writeObject(list); // Lưu dữ liệu vào file làm ẩn -> không cần thông báo đã lưu thành công
-        }catch (IOException e) {Validator.Notice("Loi: " + e); // nếu thất bại thì thông báo để biết đã lỗi, có thể dùng hàm message() để đọc được lỗi đang bị. Nhưng có thể bị null, nên dùng e đọc lỗi trực tiếp.
+        }catch (IOException e) {OutputViewer.Notice("Error: " + e); // nếu thất bại thì thông báo để biết đã lỗi, có thể dùng hàm message() để đọc được lỗi đang bị. Nhưng có thể bị null, nên dùng e đọc lỗi trực tiếp.
         }
     }
 
@@ -68,7 +69,7 @@ public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
             // dùng readObject để đọc data trong file
             list = (List<T>) ois.readObject(); // ép kiểu Object thành List<Dept>
         } catch (Exception e) {
-            Validator.Notice("Loi: " + e.getMessage());
+            OutputViewer.Notice("Error: " + e.getMessage());
         }
     }
 
@@ -76,7 +77,7 @@ public abstract class BaseManager<T extends BaseEntity> implements IManager<T>{
     public boolean isEmptyList(String errorMsg){
         // Nếu trong list rỗng -> chỉ in thông báo ds trống
         if (list.isEmpty()) { // list nằm ở BaseMan
-            Validator.Notice(errorMsg);
+            OutputViewer.listEmptyErr(errorMsg);
             return true;
         }
         return false;

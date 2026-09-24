@@ -1,6 +1,7 @@
-package hospital;
+package model;
 import java.util.Date;
-import util.Validator;
+
+import util.Utils;
 
 public class Doctor extends BaseEntity{
     private String sex;
@@ -36,8 +37,8 @@ public class Doctor extends BaseEntity{
     // ==== Hàm in ====
     @Override public String toString(){
         // Đặt biến chỉnh form ngày in
-        String sdfCreateDate = Validator.formatDate(getCreateDate());
-        String sdfUpdateDate = Validator.formatDate(getLastUpdateDate());
+        String sdfCreateDate = Utils.formatDate(getCreateDate());
+        String sdfUpdateDate = Utils.formatDate(getLastUpdateDate());
 
         // Vẽ bảng in
         return String.format("| %-15s | %-30s | %-7s | %-50s | %-15s | %-12s | %-12s |", getDoctorID(), getDoctorName(), sex, address, getDepartmentID(), sdfCreateDate, sdfUpdateDate);

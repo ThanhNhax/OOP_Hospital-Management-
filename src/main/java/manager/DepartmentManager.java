@@ -1,6 +1,6 @@
-package hospital;
-
-import util.Validator;
+package manager;
+import model.*;
+import view.OutputViewer;
 
 // IManager tương tự prototype, chứa các tên hàm cần thực thi. DeptMan cần viết định nghĩa để thực thi (implements) các hàm đó. VD khi gọi:
 /*IManager<Department> deptManager = new DepartmentManager();
@@ -33,7 +33,7 @@ public class DepartmentManager extends BaseManager<Department>{ // Nghĩa là De
     // 2. showAll()
     @Override public void showAll(){
         // 1. Kiểm tra trống
-        if (isEmptyList("Danh sach phong ban trong!!")) return; // Dừng luôn
+        if (isEmptyList("Department")) return; // Dừng luôn
         // Nếu không trống
         // 2. In tiêu đề
         printHeader();
@@ -50,14 +50,14 @@ public class DepartmentManager extends BaseManager<Department>{ // Nghĩa là De
             dept.showInfo(); // in ra infor của dòng dept đó
         }
         // Else -> không có deptID đó -> báo lỗi
-        else Validator.Notice("Khong tim thay phong ban co ID: " + id);
+        else OutputViewer.unFind("Department", id);
     }
 
     // =====
     // Thêm has_doctor để kiểm tra nếu có doctor thì không được xóa.
     public boolean hasDoctor(String deptID, DoctorManager docMan){
         // Duyệt trong docList, nếu vẫn có deptID trùng với deptID đang cần xóa -> có doc -> true
-        for (Doctor doc : docMan.getlist()) if (doc.getDepartmentID().equalsIgnoreCase(deptID)) return true;
+        for (Doctor doc : docMan.getList()) if (doc.getDepartmentID().equalsIgnoreCase(deptID)) return true;
         // Nếu không có -> false.
         return false;
     }

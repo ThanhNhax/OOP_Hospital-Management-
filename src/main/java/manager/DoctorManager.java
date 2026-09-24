@@ -1,6 +1,6 @@
-package hospital;
-
-import util.Validator;
+package manager;
+import model.*;
+import view.OutputViewer;
 
 // DocMan kế thừa từ BaseMan
 public class DoctorManager extends BaseManager<Doctor>{
@@ -27,7 +27,7 @@ public class DoctorManager extends BaseManager<Doctor>{
 
     @Override public void showAll(){
         // Kiểm tra list trống thì dừng luôn
-        if (isEmptyList("Danh sach bac si trong!!")) return;
+        if (isEmptyList("Doctor")) return;
         // không thì in tiêu đề
         printHeader();
         for (Doctor doc : list) doc.showInfo(); // In ra từng dòng info.
@@ -50,8 +50,13 @@ public class DoctorManager extends BaseManager<Doctor>{
             }
         }
         // Nếu hết vòng vẫn không tìm thấy bác sĩ nào -> vẫn false -> thông báo
-        if (!found){
-            Validator.Notice("Khong tim thay bac si nao chua tu khoa: " + namekey);
-        }
+        if (!found) OutputViewer.unFind("Doctor", namekey);
+    }
+
+    // Thêm has_patient để nếu doctor còn đang xử lý cho ít nhất 1 patient -> không thể xóa
+    public boolean hasPatient(String docID, PatientManager patMan){
+        // Duyệt trong patList, nếu docID của pat == docID đang tìm => doc đó còn phụ trách pat
+        for (Patient pat : patMan.getList()) if (pat.getDocID().equalsIgnoreCase(docID)) return true;
+        return false;
     }
 }

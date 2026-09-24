@@ -1,6 +1,7 @@
-package hospital;
+package model;
 import java.util.Date;
-import util.Validator;
+
+import util.Utils;;
 
 // Kế thừa (extends) từ hàm cha BaseEntity
 public class Department extends BaseEntity {
@@ -32,8 +33,8 @@ public class Department extends BaseEntity {
     public String toString() {
         // đặt biến String để nhận kết quả ngày in trả về. "" nếu NULL, else thì trả
         // đúng ngày get được đã sdf.format
-        String strCreateDate = Validator.formatDate(getCreateDate());
-        String strUpdateDate = Validator.formatDate(getLastUpdateDate());
+        String strCreateDate = Utils.formatDate(getCreateDate());
+        String strUpdateDate = Utils.formatDate(getLastUpdateDate());
         // Dùng formart để vẽ khung tương tự printf("%-15s | %-20s", deparmentID, name) của C++
         return String.format("| %-15s | %-30s | %-12s | %-12s |", getDepartmentID(), getDepartmentName(), strCreateDate, strUpdateDate);
     }
