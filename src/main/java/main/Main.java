@@ -12,7 +12,7 @@ public class Main {
         while (true) {
             // In menu
             OutputViewer.printMainMenu();
-            
+
             // Tạo biến chọn, không được rỗng
             String choice = InputValidator.readNonEmptyString("Enter your choice: ");
 
@@ -50,7 +50,7 @@ public class Main {
                     }
                     break;
                 default:
-                    OutputViewer.errChoice(0,8);
+                    OutputViewer.errChoice(0, 8);
             }
         }
     }
