@@ -27,7 +27,10 @@ public class PatientHandle {
     public void addPatient(DoctorManager docMan){
         // 1. PatID phải KHÔNG tồn tại
         String patID = InputValidator.readValidString("Patient ID: ",null, "add", id -> patMan.findByID(id) == null, "Error: Patient ID already exists!!"); // phải không tìm thấy ID nào -> null -> không trùng thì mới được nhập
-
+        if (patID == null){
+            OutputViewer.Cancelled("Add", "Patient");
+            return; // Thoát về menu chính
+        }  
         // 2. Nhập các thông tin cơ bản
         String name = InputValidator.readNonEmptyString("Patient Name: ");
         String sex = InputValidator.readGender("Patient Sex (M/F): ", null, "add"); // có định dạng M/F, Male/Female
@@ -38,7 +41,10 @@ public class PatientHandle {
 
         // 3. DocID phải CÓ tồn tại: nếu id không tồn tại thì trả về null bằng findByID -> bắt buộc != null
         String docID = InputValidator.readValidString("Doctor ID: ",null, "add", id -> docMan.findByID(id) != null, "Error: Doctor ID does not exist!!"); // phải tìm thấy id -> khác null -> mới được nhập
-
+        if (docID == null){
+            OutputViewer.Cancelled("Add", "Patient");
+            return; // Thoát về menu chính
+        }  
         // 4. admissionStatus phải là trạng thái hợp lệ
         String status = InputValidator.readAdmissionStatus("Admission Status: ", null, "add");
 
@@ -56,6 +62,10 @@ public class PatientHandle {
     public void deletePatient(){
         // Tìm patID để xóa
         String patID = InputValidator.readValidString("Patient ID: ",null, "delete", id -> patMan.findByID(id) != null, "Error: Patient ID does not exist!!");
+        if (patID == null){
+            OutputViewer.Cancelled("Delete", "Patient");
+            return; // Thoát về menu chính
+        }  
         // Đúng ID -> xác nhận xóa
         boolean confirm = InputValidator.readConfirm("delete this Patient");
         if (confirm) {

@@ -45,7 +45,6 @@ public class OutputViewer {
         Notice("7. Save to file");
         Notice("8. Load from file");
         Notice("0. Exit");
-        Notice("Enter your choice: ");
     }
 
     // 3. In menu con cho đối tượng

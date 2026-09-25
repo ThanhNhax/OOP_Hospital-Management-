@@ -20,16 +20,25 @@ public class DoctorHandle {
     }
 
     // === Các hàm thêm, xóa, sửa cho Doc
+    // Cho phép thoát khi infor trả về null
     // 1. Thêm bác sĩ: yêu cầu không trùng docID và phòng ban đã tồn tại.
     public void addDoctor(DepartmentManager deptMan){
         // 1. Nhập docID trước - không trùng docID
         String docID = InputValidator.readValidString("Doctor ID: ",null, "add", id -> !docMan.isDuplicateID(id), "Error: Doctor ID already exists!!");
+        if (docID == null){
+            OutputViewer.Cancelled("Add", "Doctor");
+            return; // Thoát về menu chính
+        }
         // 2. Nhập các thông tin tên doc, sex, addr
         String docName = InputValidator.readNonEmptyString("Doctor Name: ");
         String docSex = InputValidator.readGender("Doctor Sex (M/F): ", null, "add");
         String docAddr = InputValidator.readNonEmptyString("Doctor Address: ");
         // 3. Nhap deptID - bắt buộc đã tồn tại, nếu nhập sai bắt buộc nhập lại deptID đến khi đúng, thay vì bắt nhập lại toàn bộ thông tin
         String deptID = InputValidator.readValidString("Department ID: ",null, "add", id -> deptMan.findByID(id) != null, "Error: Department ID does not exist!!"); // Nếu ID không tồn tại thì trả về null -> bắt buộc phải != null
+        if (deptID == null){
+            OutputViewer.Cancelled("Add", "Doctor");
+            return; // Thoát về menu chính        
+        }
         // 4. Dùng hàm khởi tạo để thêm thông tin
         Doctor newDoc = new Doctor(docID, docName, docSex, docAddr, deptID, new Date(), null);
         // 5. Nếu thêm vào docMan thành công -> in ra thông báo và savetoFile vào docFile
@@ -43,6 +52,11 @@ public class DoctorHandle {
     public void deleteDoctor(PatientManager patMan){
         // Tìm docID để xóa
         String docID = InputValidator.readValidString("Doctor ID: ",null, "delete", id -> docMan.findByID(id) != null, "Error: Doctor ID does not exist!!");
+        // Nếu user không muốn xóa -> nhập 0 -> thoát nhanh
+        if (docID == null){
+            OutputViewer.Cancelled("Delete", "Doctor");
+            return; // Thoát về menu chính
+        }
         // Đúng ID -> nếu doctor không còn phụ trách patient
         if (!docMan.hasPatient(docID, patMan)){
             // Xác nhận xóa

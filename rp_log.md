@@ -73,6 +73,12 @@
 - PatientHandle.java: Xong thêm, xóa, update, in, search, save, load
 
 # 24/9:
+### P1:
 - Chỉnh Menu theo đề
 - Sửa search và display theo đề
 - Done MainMenu
+
+### P2:
+- Sửa câu 'enter your choice' qua choice trong main
+- Thêm obj 'the system' cho câu succeful khi exit
+- Sửa lỗi infinite loop khi deptid/docid chưa tồn tại -> nhập doc/pat bị lỗi. Hoặc khi xóa nếu chưa tồn tại dept/doc/patid -> lặp bắt nhập lại => thêm phím 0 cho phép thoát ngang.

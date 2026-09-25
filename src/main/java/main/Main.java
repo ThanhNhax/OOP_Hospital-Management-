@@ -14,7 +14,7 @@ public class Main {
             OutputViewer.printMainMenu();
             
             // Tạo biến chọn, không được rỗng
-            String choice = InputValidator.readNonEmptyString(null);
+            String choice = InputValidator.readNonEmptyString("Enter your choice: ");
 
             switch (choice) {
                 case "1":
@@ -45,7 +45,7 @@ public class Main {
                     // Xác nhận trước khi thoát
                     boolean isExit = InputValidator.readConfirm("exit");
                     if (isExit) {
-                        OutputViewer.Successfully("exit", null);
+                        OutputViewer.Successfully("Exit", "the system");
                         return;
                     }
                     break;

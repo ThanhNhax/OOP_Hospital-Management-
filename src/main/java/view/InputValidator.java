@@ -41,10 +41,13 @@ public class InputValidator {
     public static String readValidString(String field, String oldValue, String mode, Predicate<String> condition, String errMsg){
         while (true){
             // Tạo thông báo phù hợp add/upd
-            String prompt = mode.equalsIgnoreCase("update") ? field + " (Enter to keep " + oldValue + "): " : field + ": ";
+            String prompt = mode.equalsIgnoreCase("update") ? field + " (Enter to keep " + oldValue + ", 0 to cancel):" : field + "(Enter 0 to cancel): ";
 
             // Nhập chuỗi đã trim(), không bắt rỗng hay không với câu thông báo theo mode
             String input = readString(prompt);
+
+            // Nếu nhập 0 -> thoát luôn
+            if (input.equals("0")) return null;
 
             // Nếu là UPDATE ENTER RỖNG -> trả về oldValue
             if (mode.equalsIgnoreCase("update") && input.isEmpty()) return oldValue;
@@ -80,12 +83,10 @@ public class InputValidator {
 
     // 5. Hàm đọc Gender, nếu thuộc Nam -> return Male, nếu thuộc Nữ -> return Female để kết quả in ra đồng bộ. (xử lý để add hoặc upd)
     public static String readGender(String field, String oldSex, String mode){
-        while(true){
-            String input = readValidString(field, oldSex, mode, g -> g.matches("(?i)^(Nam|Nu|M|F|Maie|Female)$"), "Error: Must enter M/F, Male/Female or Nam/Nu!!"); // regex để i chỉ được là một trong các lựa chọn
-            if (input.equalsIgnoreCase("Nam") || input.equalsIgnoreCase("M") || input.equalsIgnoreCase("Male")) return "Male";
-            if (input.equalsIgnoreCase("Nu") || input.equalsIgnoreCase("F") || input.equalsIgnoreCase("Female")) return "Female";
-            return input;
-        }
+        String input = readValidString(field, oldSex, mode, g -> g.matches("(?i)^(Nam|Nu|M|F|Maie|Female)$"), "Error: Must enter M/F, Male/Female or Nam/Nu!!"); // regex để i chỉ được là một trong các lựa chọn
+        if (input.equalsIgnoreCase("Nam") || input.equalsIgnoreCase("M") || input.equalsIgnoreCase("Male")) return "Male";
+        if (input.equalsIgnoreCase("Nu") || input.equalsIgnoreCase("F") || input.equalsIgnoreCase("Female")) return "Female";
+        return input;
     }
 
     // 6. Hảm xử lý phone (dùng cho add và upd)
@@ -102,9 +103,7 @@ public class InputValidator {
 
     // 7. Hàm xử lý date (dùng cho add và upd)
     public static String readDate(String field, String oldDate, String mode){
-        while (true){
-            return readValidString(field, oldDate, mode, dateStr -> Utils.parseDate(dateStr) != null, "Error: Invalid date! Please enter valid date in dd/MM/yyyy format (e.g. 28/02/2026).");
-        }
+        return readValidString(field, oldDate, mode, dateStr -> Utils.parseDate(dateStr) != null, "Error: Invalid date! Please enter valid date in dd/MM/yyyy format (e.g. 28/02/2026).");
     }
 
     // 8. Hàm xử lý admission status với 3 trạng thái: Admitted/Discharged/In Treatment (dùng cho add và upd)

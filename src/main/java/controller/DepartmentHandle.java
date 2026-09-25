@@ -24,6 +24,10 @@ public class DepartmentHandle {
     // 1. Thêm Department => bắt buộc DeptID không trùng
     public void addDepartment(){
         String deptID = InputValidator.readValidString("Department ID: ", null, "add",id -> !deptMan.isDuplicateID(id), "Error: Department ID already exists!!");
+        if (deptID == null){
+            OutputViewer.Cancelled("Add", "Department");
+            return; // Thoát về menu chính
+        }      
         // Tiếp tục nhập tên dept (không có định dạng)
         String deptName = InputValidator.readNonEmptyString("Department name: ");
         // Ngày tạo là lúc nhập -> chỉ cần gọi hàm Constructor điền thông tin vào với new Date(), ngày lastUpdate = null vì chưa có Update.
@@ -39,6 +43,10 @@ public class DepartmentHandle {
     public void deleteDepartment(DoctorManager docMan){
         // Tìm dept ID có tồn tại
         String deptID = InputValidator.readValidString("Department ID: ", null, "delete", id -> deptMan.findByID(id) != null, "Error: Department ID does not exist!!");
+        if (deptID == null){
+            OutputViewer.Cancelled("Delete", "Department");
+            return; // Thoát về menu chính
+        }  
         // Nếu không còn doc -> !true thì xác nhận, Y thì xóa
         if (!deptMan.hasDoctor(deptID, docMan)) {
             boolean confirm = InputValidator.readConfirm("delete this Department");
