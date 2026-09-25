@@ -5,6 +5,7 @@ import java.util.Date;
 
 // Cần implements Serializable để sau này ghi/đọc đối tượng ra file .dat
 public abstract class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 1L; // Khai báo cứng để tránh lỗi mismatch khi thêm method mới
     private String id; // ID chính của Department là departmentID, của doctor là doctorID -> ID ở Base
                        // khi được kế thừa ở class nào sẽ được định nghĩa đúng với bản chất của class
                        // đó.
