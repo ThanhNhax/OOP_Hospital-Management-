@@ -88,3 +88,10 @@
 - Sửa lỗi truyền ngược tham số DOB và Phone của Patient (sửa trong tham số của Constructor của Patient)
 - Sửa lỗi in ngày DOB, bắt buộc 2-2-4 (sửa trong utils.parseDate())
 - Sửa lỗi chính tả Maie -> Male trong readGender() - lỗi không nhận 'Male'
+
+### P2:
+- Đồng bộ: câu tiếng Anh + sửa DOB trong readDate (InputValidator) thay vì utils.
+- Sửa: add, upd của patient không bị ràng buộc với doctor (vì đề mới chỉ có 1 class patient)
+- Sửa gender thêm chọn phím số 1, 2
+- Sửa phone cho phép nhập 0 bỏ qua
+- Sửa status cho phép nhập 1, 2, 3 để chọn trạng thái thay vì gõ chữ.

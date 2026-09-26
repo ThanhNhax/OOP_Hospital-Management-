@@ -24,9 +24,9 @@ public class PatientHandle {
 
     // === Các hàm thêm, xóa, sửa cho Pat
     // 1. Thêm: Không có field nào được để trống.
-    public void addPatient(DoctorManager docMan){
+    public void addPatient(){
         // 1. PatID phải KHÔNG tồn tại
-        String patID = InputValidator.readValidString("Patient ID: ",null, "add", id -> patMan.findByID(id) == null, "Error: Patient ID already exists!!"); // phải không tìm thấy ID nào -> null -> không trùng thì mới được nhập
+        String patID = InputValidator.readValidString("Patient ID (Enter 0 to cancel)",null, "add", id -> patMan.findByID(id) == null, "Error: Patient ID must not be empty and must not exist!!"); // phải không tìm thấy ID nào -> null -> không trùng thì mới được nhập
         if (patID == null){
             OutputViewer.Cancelled("Add", "Patient");
             return; // Thoát về menu chính
@@ -39,17 +39,13 @@ public class PatientHandle {
         String phone = InputValidator.readPhone("Phone Number: ", null, "add"); // phone phải dúng (chuỗi số 10 số)
         String diagnosis = InputValidator.readNonEmptyString("Diagnosis: ");
 
-        // 3. DocID phải CÓ tồn tại: nếu id không tồn tại thì trả về null bằng findByID -> bắt buộc != null
-        String docID = InputValidator.readValidString("Doctor ID: ",null, "add", id -> docMan.findByID(id) != null, "Error: Doctor ID does not exist!!"); // phải tìm thấy id -> khác null -> mới được nhập
-        if (docID == null){
-            OutputViewer.Cancelled("Add", "Patient");
-            return; // Thoát về menu chính
-        }  
+        // 3. docID, không ràng buộc vì đề mới chỉ có 1 class
+        String doctor = InputValidator.readNonEmptyString("Assigned Doctor");
         // 4. admissionStatus phải là trạng thái hợp lệ
         String status = InputValidator.readAdmissionStatus("Admission Status: ", null, "add");
 
         // Đưa vào constructor
-        Patient newPat = new Patient(patID, name, sex, addr, dob, phone, diagnosis, docID, status, new Date(), null);
+        Patient newPat = new Patient(patID, name, sex, addr, dob, phone, diagnosis, doctor, status, new Date(), null);
 
         // Lưu vào list, nếu thành công -> save file
         if (patMan.add(newPat)){
@@ -61,7 +57,7 @@ public class PatientHandle {
     // 2. Xóa theo PatID
     public void deletePatient(){
         // Tìm patID để xóa
-        String patID = InputValidator.readValidString("Patient ID: ",null, "delete", id -> patMan.findByID(id) != null, "Error: Patient ID does not exist!!");
+        String patID = InputValidator.readValidString("Patient ID (Enter 0 to cancel)",null, "delete", id -> patMan.findByID(id) != null, "Error: Patient ID does not exist!!");
         if (patID == null){
             OutputViewer.Cancelled("Delete", "Patient");
             return; // Thoát về menu chính
@@ -76,14 +72,15 @@ public class PatientHandle {
     }
 
     // update
-    public void updatePat(DoctorManager docMan){
+    public void updatePat(){
         // Nhập ID tìm Pat muốn upd
-        String patID = InputValidator.readNonEmptyString("Patient ID: ");
-        Patient oldPat = patMan.findByID(patID);
-        if (oldPat == null){
-            OutputViewer.Notice("Error: Patient ID does not exist!!");
+        String patID = InputValidator.readValidString("Patient ID (Enter 0 to cancel)", null, "updateWithoutChange",
+                id -> !id.isEmpty() && patMan.findByID(id) != null, "Error: Patient ID does not exist!!");
+        if (patID == null) {
+            OutputViewer.Cancelled("Update", "Patient");
             return;
         }
+        Patient oldPat = patMan.findByID(patID);
         // 1. Name (không định dạng)
         String newName = InputValidator.readUpdateString("name", oldPat.getName());
         // 2. Sex (có định dạng)
@@ -95,21 +92,13 @@ public class PatientHandle {
         // 5. phone
         String newPhone = InputValidator.readPhone("phone", oldPat.getPatPhone(), "update");
         String newDiag = InputValidator.readUpdateString("diagnosis", oldPat.getPatDiagnosis());
-        // 6. DocID - nếu nhập mới thì bắt buộc có trong docList, nếu không thì bắt nhập lại đến khi đúng.
-        // Đặt biến lấy docID cũ trước tương tự Doctor
-        String oldDocID = oldPat.getDocID();
-        while(true){
-            String newDocID = InputValidator.readUpdateString("doctor ID", oldDocID);
-            if (newDocID.equals(oldDocID)) break;
-            if (docMan.findByID(newDocID) != null){
-                oldDocID = newDocID;
-                break;
-            }else OutputViewer.Notice("Error: Doctor ID does not exist!!");
-        }
+        // 6. Doctor (không ràng buộc với Pat)
+        String newDoc = InputValidator.readUpdateString("assigned doctor", oldPat.getAssignedDoctor());
         // 7. Admission status
         String newStatus = InputValidator.readAdmissionStatus("admission status", oldPat.getPatAdmissionStatus(), "update");
+
         // Đưa vào Doc Constructor
-        Patient updPat = new Patient(patID, newName, newSex, newAddr, newDOB, newPhone, newDiag, oldDocID, newStatus, oldPat.getCreateDate(), new Date());
+        Patient updPat = new Patient(patID, newName, newSex, newAddr, newDOB, newPhone, newDiag, newDoc, newStatus, oldPat.getCreateDate(), new Date());
 
         if (patMan.update(updPat)) {
             OutputViewer.Successfully("Update", "Patient");

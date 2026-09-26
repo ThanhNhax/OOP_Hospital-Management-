@@ -9,7 +9,7 @@ public class Patient extends BaseEntity{
     private String phone;
     private String dob;
     private String diagnosis;
-    private String doctorID; // Chỉ lưu docID để search doctor khi cần và dễ dàng lưu file
+    private String assignedDoctor; // Chỉ lưu docID để search doctor khi cần và dễ dàng lưu file
     private String admissionStatus;
 
     // === Hàm khởi tạo
@@ -17,14 +17,14 @@ public class Patient extends BaseEntity{
     public Patient(){}
 
     // 2. Constructor đầy đủ
-    public Patient(String PatID, String fullname, String sex, String addr, String dob, String phone, String diagnosis, String docID, String status, Date creatDate, Date updateDate){
+    public Patient(String PatID, String fullname, String sex, String addr, String dob, String phone, String diagnosis, String assignedDoctor, String status, Date creatDate, Date updateDate){
         super(PatID, fullname, creatDate, updateDate); // Vẫn lấy ngày tạo và lastUpdate, khi controller tạo mới dùng new Date() để tạo ngày truyền vào tham số.
         this.sex = sex;
         this.address = addr;
         this.phone = phone;
         this.dob = dob;
         this.diagnosis = diagnosis;
-        this.doctorID = docID;
+        this.assignedDoctor = assignedDoctor;
         this.admissionStatus = status;
     }
 
@@ -37,7 +37,7 @@ public class Patient extends BaseEntity{
     public String getPatPhone(){return phone;}
     public String getPatDOB(){return dob;}
     public String getPatDiagnosis(){return diagnosis;}
-    public String getDocID(){return doctorID;}
+    public String getAssignedDoctor(){return assignedDoctor;}
     public String getPatAdmissionStatus(){return admissionStatus;}
 
     // 2. Setter: tương tự Doctor
@@ -46,7 +46,7 @@ public class Patient extends BaseEntity{
     public void setPatPhone(String phone){this.phone = phone;}
     public void setPatDOB(String dob){this.dob = dob;}
     public void setPatDiag(String diag){this.diagnosis = diag;}
-    public void setPatDocID(String docID){this.doctorID = docID;}
+    public void setPatDocID(String assignedDoctor){this.assignedDoctor = assignedDoctor;}
     public void setPatStatus(String status){this.admissionStatus = status;}
 
     // Chuẩn bị in
@@ -56,7 +56,7 @@ public class Patient extends BaseEntity{
         String sdfCreateDate = Utils.formatDate(getCreateDate());
         String sdfUpdateDate = Utils.formatDate(getLastUpdateDate());
 
-        return String.format("| %-15s | %-30s | %-7s | %-50s | %-10s | %-12s | %-20s | %-15s | %-15s | %-12s | %-12s |", getPatientID(), getPatientName(), sex, address, dob, phone, diagnosis, doctorID, admissionStatus, sdfCreateDate, sdfUpdateDate); // In thêm date
+        return String.format("| %-15s | %-30s | %-7s | %-50s | %-10s | %-12s | %-20s | %-15s | %-15s | %-12s | %-12s |", getPatientID(), getPatientName(), sex, address, dob, phone, diagnosis, assignedDoctor, admissionStatus, sdfCreateDate, sdfUpdateDate); // In thêm date
     }
 
     @Override public void showInfo(){System.out.println(this.toString());}

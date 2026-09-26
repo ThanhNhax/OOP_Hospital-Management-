@@ -64,7 +64,7 @@ public class PatientManager extends BaseManager<Patient>{
         for (Patient p : list){
             // Nếu keyLower có trong bất kỳ tiêu chí nào thì xử lý
             // Đặt các tiêu chí vào biến boolean isMatch để dễ dùng lại nếu cần
-            boolean isMatch = p.getPatientID().toLowerCase().contains(keyLower) || p.getPatientName().toLowerCase().contains(keyLower) || p.getPatDiagnosis().toLowerCase().contains(keyLower) || p.getDocID().toLowerCase().contains(keyLower) || p.getPatAdmissionStatus().toLowerCase().contains(keyLower);
+            boolean isMatch = p.getPatientID().toLowerCase().contains(keyLower) || p.getPatientName().toLowerCase().contains(keyLower) || p.getPatDiagnosis().toLowerCase().contains(keyLower) || p.getAssignedDoctor().toLowerCase().contains(keyLower) || p.getPatAdmissionStatus().toLowerCase().contains(keyLower);
             // Nếu isMatch true -> xử lý in tất cả gần giống
             if (isMatch){
                 // Nếu chưa từng tìm thấy -> in tiêu đề 1 lần duy nhất -> found thành true

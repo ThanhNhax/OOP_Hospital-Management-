@@ -20,7 +20,7 @@ public class HospitalHandler {
             if (Choose.equals("0")) return;
             else if (Choose.equals("1")) deptHan.addDepartment();
             else if (Choose.equals("2")) docHan.addDoctor(deptHan.getDeptMan()); // Truyền tham số lấy deptMan trong deptHan để lấy được deptID
-            else if (Choose.equals("3")) patHan.addPatient(docHan.getDocMan()); // Truyền tham số lấy docMan trong docHan để lấy docID
+            else if (Choose.equals("3")) patHan.addPatient(); // Truyền tham số lấy docMan trong docHan để lấy docID
             // Nếu không chọn 0-3 thì báo lỗi
             else OutputViewer.errChoice(0, 3);
         }
@@ -52,7 +52,7 @@ public class HospitalHandler {
             if (Choose.equals("0")) return;
             else if (Choose.equals("1")) deptHan.updateDept();
             else if (Choose.equals("2")) docHan.updateDoc(deptHan.getDeptMan());
-            else if (Choose.equals("3")) patHan.updatePat(docHan.getDocMan());
+            else if (Choose.equals("3")) patHan.updatePat();
             else OutputViewer.errChoice(0, 3);
         }
     }

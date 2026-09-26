@@ -41,13 +41,14 @@ public class InputValidator {
     public static String readValidString(String field, String oldValue, String mode, Predicate<String> condition, String errMsg){
         while (true){
             // Tạo thông báo phù hợp add/upd
-            String prompt = mode.equalsIgnoreCase("update") ? field + " (Enter to keep " + oldValue + ", 0 to cancel):" : field + "(Enter 0 to cancel): ";
+            String prompt = mode.equalsIgnoreCase("update") ? field + " (Enter to keep " + oldValue + "): " : field + ": ";
 
             // Nhập chuỗi đã trim(), không bắt rỗng hay không với câu thông báo theo mode
             String input = readString(prompt);
 
-            // Nếu nhập 0 -> thoát luôn
-            if (input.equals("0")) return null;
+            // Allow canceling only if it's explicitly stated in the prompt by the caller (like for ID)
+            if (input.equals("0") && field.contains("0 to exit")) return null;
+            if (input.equals("0") && field.contains("0 to cancel")) return null;
 
             // Nếu là UPDATE ENTER RỖNG -> trả về oldValue
             if (mode.equalsIgnoreCase("update") && input.isEmpty()) return oldValue;
@@ -83,16 +84,21 @@ public class InputValidator {
 
     // 5. Hàm đọc Gender, nếu thuộc Nam -> return Male, nếu thuộc Nữ -> return Female để kết quả in ra đồng bộ. (xử lý để add hoặc upd)
     public static String readGender(String field, String oldSex, String mode){
-        String input = readValidString(field, oldSex, mode, g -> g.matches("(?i)^(Nam|Nu|M|F|Male|Female)$"), "Error: Must enter M/F, Male/Female or Nam/Nu!!"); // regex để i chỉ được là một trong các lựa chọn
-        if (input.equalsIgnoreCase("Nam") || input.equalsIgnoreCase("M") || input.equalsIgnoreCase("Male")) return "Male";
-        if (input.equalsIgnoreCase("Nu") || input.equalsIgnoreCase("F") || input.equalsIgnoreCase("Female")) return "Female";
+        String input = readValidString(field, oldSex, mode, g -> g.matches("(?i)^(Nam|Nu|M|F|Male|Female|1|2)$"), "Error: Must enter M/F, Male/Female or 1: Male, 2: Female"); // regex để i chỉ được là một trong các lựa chọn
+        if (input.equalsIgnoreCase("Nam") || input.equalsIgnoreCase("M") || input.equalsIgnoreCase("Male") || input.equals("1")) return "Male";
+        if (input.equalsIgnoreCase("Nu") || input.equalsIgnoreCase("F") || input.equalsIgnoreCase("Female") || input.equals("2")) return "Female";
         return input;
     }
 
     // 6. Hảm xử lý phone (dùng cho add và upd)
     public static String readPhone(String msg, String oldPhone, String mode){
         // Xử lý regex: ^0\\d{9}$ nghĩa là ký tự đầu tiên bắt buộc là 0, sau đó phải có đúng 9 số int
-        return readValidString(msg, oldPhone, mode, phone -> phone.matches("^0\\d{9}$"), "Error: Invalid phone number! Must be 10 digits starting with 0.");
+        // Thêm điều kiện: Hoặc là nhập đúng 10 số, hoặc nhập "0" (để bỏ qua/không có số)
+        String input = readValidString(msg, oldPhone, mode, phone -> phone.equals("0") || phone.matches("^0\\d{9}$"), "Error: Invalid phone number! Must be 10 digits starting with 0 (or enter 0 to skip).");
+
+        // Nếu input == 0 thì return None
+        if ("0".equals(input)) return "None";
+        return input;
         /*
         ^: Đánh dấu Bắt đầu chuỗi.
         $: Đánh dấu Kết thúc chuỗi.
@@ -103,18 +109,18 @@ public class InputValidator {
 
     // 7. Hàm xử lý date (dùng cho add và upd)
     public static String readDate(String field, String oldDate, String mode){
-        return readValidString(field, oldDate, mode, dateStr -> Utils.parseDate(dateStr) != null, "Error: Invalid date! Please enter valid date in dd/MM/yyyy format (e.g. 28/02/2026).");
+        return readValidString(field, oldDate, mode, dateStr -> dateStr.matches("^\\d{2}/\\d{2}/\\d{4}$") && Utils.parseDate(dateStr) != null, "Error: Invalid date! Please enter valid date in dd/MM/yyyy format (e.g. 28/02/2026).");
     }
 
     // 8. Hàm xử lý admission status với 3 trạng thái: Admitted/Discharged/In Treatment (dùng cho add và upd)
     public static String readAdmissionStatus(String field, String oldStatus, String mode){
-        while (true){
-            // Nhập status không rỗng
-            String status = readValidString(field, oldStatus, mode, s -> s.equalsIgnoreCase("Admitted") || s.equalsIgnoreCase("Discharged") || s.equalsIgnoreCase("In Treatment"), "Error: Must enter Admitted or Discharged or In Treatment!!");
-            if (status.equalsIgnoreCase("Admitted")) return "Admitted";
-            if (status.equalsIgnoreCase("Discharged")) return "Discharged";
-            if (status.equalsIgnoreCase("In Treatment")) return "In Treatment";
-            return status;
-        }
+        // Ghép câu prompt trước:
+        String label = field + " (1: Admitted, 2: Discharged, 3: In Treatment)";
+        // Nhập status không rỗng và dùng re4gex bắt chỉ được chọn một trong các nội dung i
+        String status = readValidString(label, oldStatus, mode, s -> s.matches("(?i)^(1|2|3|Admitted|Discharged|In Treatment)$"), "Error: Must choose 1, 2, 3 or enter valid status (Admitted/Discharged/In Treatment)!!");
+        if (status.equals("1") || status.equalsIgnoreCase("Admitted")) return "Admitted";
+        if (status.equals("2") || status.equalsIgnoreCase("Discharged")) return "Discharged";
+        if (status.equals("3") || status.equalsIgnoreCase("In Treatment")) return "In Treatment";
+        return status;
     }
 }

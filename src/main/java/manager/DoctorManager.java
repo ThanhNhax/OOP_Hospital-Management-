@@ -56,7 +56,7 @@ public class DoctorManager extends BaseManager<Doctor>{
     // Thêm has_patient để nếu doctor còn đang xử lý cho ít nhất 1 patient -> không thể xóa
     public boolean hasPatient(String docID, PatientManager patMan){
         // Duyệt trong patList, nếu docID của pat == docID đang tìm => doc đó còn phụ trách pat
-        for (Patient pat : patMan.getList()) if (pat.getDocID().equalsIgnoreCase(docID)) return true;
+        for (Patient pat : patMan.getList()) if (pat.getAssignedDoctor().equalsIgnoreCase(docID)) return true;
         return false;
     }
 }
