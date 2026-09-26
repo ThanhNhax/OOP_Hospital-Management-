@@ -82,3 +82,9 @@
 - Sửa câu 'enter your choice' qua choice trong main
 - Thêm obj 'the system' cho câu succeful khi exit
 - Sửa lỗi infinite loop khi deptid/docid chưa tồn tại -> nhập doc/pat bị lỗi. Hoặc khi xóa nếu chưa tồn tại dept/doc/patid -> lặp bắt nhập lại => thêm phím 0 cho phép thoát ngang.
+
+# 26/9:
+### P1:
+- Sửa lỗi truyền ngược tham số DOB và Phone của Patient (sửa trong tham số của Constructor của Patient)
+- Sửa lỗi in ngày DOB, bắt buộc 2-2-4 (sửa trong utils.parseDate())
+- Sửa lỗi chính tả Maie -> Male trong readGender() - lỗi không nhận 'Male'

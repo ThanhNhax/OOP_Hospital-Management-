@@ -83,7 +83,7 @@ public class InputValidator {
 
     // 5. Hàm đọc Gender, nếu thuộc Nam -> return Male, nếu thuộc Nữ -> return Female để kết quả in ra đồng bộ. (xử lý để add hoặc upd)
     public static String readGender(String field, String oldSex, String mode){
-        String input = readValidString(field, oldSex, mode, g -> g.matches("(?i)^(Nam|Nu|M|F|Maie|Female)$"), "Error: Must enter M/F, Male/Female or Nam/Nu!!"); // regex để i chỉ được là một trong các lựa chọn
+        String input = readValidString(field, oldSex, mode, g -> g.matches("(?i)^(Nam|Nu|M|F|Male|Female)$"), "Error: Must enter M/F, Male/Female or Nam/Nu!!"); // regex để i chỉ được là một trong các lựa chọn
         if (input.equalsIgnoreCase("Nam") || input.equalsIgnoreCase("M") || input.equalsIgnoreCase("Male")) return "Male";
         if (input.equalsIgnoreCase("Nu") || input.equalsIgnoreCase("F") || input.equalsIgnoreCase("Female")) return "Female";
         return input;

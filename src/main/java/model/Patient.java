@@ -17,7 +17,7 @@ public class Patient extends BaseEntity{
     public Patient(){}
 
     // 2. Constructor đầy đủ
-    public Patient(String PatID, String fullname, String sex, String addr, String phone, String dob, String diagnosis, String docID, String status, Date creatDate, Date updateDate){
+    public Patient(String PatID, String fullname, String sex, String addr, String dob, String phone, String diagnosis, String docID, String status, Date creatDate, Date updateDate){
         super(PatID, fullname, creatDate, updateDate); // Vẫn lấy ngày tạo và lastUpdate, khi controller tạo mới dùng new Date() để tạo ngày truyền vào tham số.
         this.sex = sex;
         this.address = addr;

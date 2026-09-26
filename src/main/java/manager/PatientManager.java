@@ -23,7 +23,7 @@ public class PatientManager extends BaseManager<Patient>{
     // === Hàm in
     // 1. header cho Patient
     public void printHeader(){
-        System.out.printf("| %-15s | %-30s | %-7s | %-50s | %-10s | %-12s | %-20s | %-15s | %-15s | %-12s | %-12s |\n", 
+        System.out.printf("| %-15s | %-30s | %-7s | %-50s | %-12s | %-10s | %-20s | %-15s | %-15s | %-12s | %-12s |\n", 
                 "Patient ID", "Full Name", "Sex", "Address", "DOB", "Phone", "Diagnosis", "Doctor ID", "Status", "Create Date", "Update Date");
     }
 

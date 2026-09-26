@@ -16,7 +16,10 @@ public class Utils {
     // String -> Date: kiểm tra ngày nhập vào có đúng định dạng ngày không
     public static Date parseDate(String date){
         // Nếu str nhận được là chuỗi rỗng hoặc null -> return null
-        if (date == null || date.trim().isEmpty()) return null;
+        // Bắt buộc chuỗi nhập vào phải đúng định dạng Regex: 2 số / 2 số / 4 số
+        // \d{2} là 2 chữ số, \d{4} là 4 chữ số -> Nếu khác thì return null
+        if (date == null || date.trim().isEmpty() || !date.trim().matches("^\\d{2}/\\d{2}/\\d{4}$")) return null;
+
         // Nếu không thì xử lý chuyển String thành Date
         // Dùng SimpleDateFormat trong lib Date để tạo biến kiểm tra form
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
